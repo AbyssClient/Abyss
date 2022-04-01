@@ -33,10 +33,18 @@ public class ModulePositionScreen extends Screen {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        Modules.getRegisteredModules().forEach(m -> {
-            if (mouseX >= m.getX() && mouseY >= m.getY() && mouseX <= m.getX() + m.getWidth() && mouseY <= m.getY() + m.getHeight())
-                this.draggedModule = m;
-        });
+        if (button == 0) {
+            Modules.getRegisteredModules().forEach(m -> {
+                if (mouseX >= m.getX() && mouseY >= m.getY() && mouseX <= m.getX() + m.getWidth() && mouseY <= m.getY() + m.getHeight())
+                    this.draggedModule = m;
+            });
+        } else if (button == 1) {
+            Modules.getRegisteredModules().forEach(m -> {
+                if (mouseX >= m.getX() && mouseY >= m.getY() && mouseX <= m.getX() + m.getWidth() && mouseY <= m.getY() + m.getHeight()) {
+                    m.switchEnabled();
+                }
+            });
+        }
         return super.mouseClicked(mouseX, mouseY, button);
     }
 

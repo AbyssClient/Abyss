@@ -68,7 +68,7 @@ public abstract class Module {
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
                     String type = entry.getValue().getAsJsonObject().get("type").getAsString();
                     switch (type) {
-                        case "boolean" -> settings.put(entry.getKey(), new BooleanSetting(
+                        case "bool" -> settings.put(entry.getKey(), new BooleanSetting(
                                 entry.getValue().getAsJsonObject().get("value")
                                         .getAsBoolean()
                         ));
