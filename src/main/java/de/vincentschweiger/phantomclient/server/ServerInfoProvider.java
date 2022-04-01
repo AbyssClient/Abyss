@@ -1,6 +1,7 @@
 package de.vincentschweiger.phantomclient.server;
 
 import de.vincentschweiger.phantomclient.Mod;
+import net.minecraft.client.MinecraftClient;
 import phantom.models.EnumRanks;
 import phantom.models.HatStyle;
 import phantom.models.UserCosmetics;
@@ -20,7 +21,6 @@ public class ServerInfoProvider {
     private static String getUsableUUID(String uuid) {
         return uuid.replaceAll("-", "");
     }
-
     private static String getUsableUUID(UUID uuid) {
         return getUsableUUID(uuid.toString());
     }
@@ -28,13 +28,15 @@ public class ServerInfoProvider {
     private static final Map<String, Boolean> clientPlayers = new HashMap<>();
     private static final ArrayList<String> queriedPlayers = new ArrayList<>();
 
-    public static boolean isClientPlayer(String uuid) {
+    public static boolean isClientPlayer(UUID uuid) {
         String usableUUID = getUsableUUID(uuid);
         if (clientPlayers.containsKey(usableUUID)) return clientPlayers.get(usableUUID);
         if (queriedPlayers.contains(usableUUID)) return false;
         queriedPlayers.add(usableUUID);
         new Thread(() -> {
             Boolean bool = Mod.getInstance().getServerConnection().isPlayer(usableUUID);
+            if (usableUUID.startsWith("777"))
+                System.out.println(usableUUID);
             clientPlayers.put(usableUUID, bool);
         }).start();
         return false;
