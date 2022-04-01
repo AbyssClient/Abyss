@@ -1,6 +1,5 @@
 package de.vincentschweiger.phantomclient.modules;
 
-import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;

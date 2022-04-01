@@ -1,11 +1,19 @@
 package de.vincentschweiger.phantomclient.modules;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import de.vincentschweiger.phantomclient.Mod;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Style;
+import org.spongepowered.include.com.google.gson.JsonElement;
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public abstract class UIModule {
 
@@ -16,7 +24,6 @@ public abstract class UIModule {
     public MatrixStack stack = new MatrixStack();
 
     public UIModule() {
-
     }
 
     public void render(boolean enabled) {
@@ -51,6 +58,8 @@ public abstract class UIModule {
         this.y = y / MinecraftClient.getInstance().getWindow().getScaledHeight();
     }
 
+    public abstract String getName();
+
     public int getWidth() {
         return MinecraftClient.getInstance().textRenderer.getWidth(getText());
     }
@@ -59,20 +68,32 @@ public abstract class UIModule {
         return 9;
     }
 
-    /**
-     * Use this to save your positions etc to a config file.
-     */
     public void save() {
-        //Your save-logic
+        File moduleConf = new File(Mod.CONFIG_DIR, getName() + ".json");
+        JsonObject obj = new JsonObject();
+        obj.addProperty("x", getX());
+        obj.addProperty("y", getY());
+        try {
+            if (!Mod.CONFIG_DIR.exists()) Mod.CONFIG_DIR.mkdir();
+            if (!moduleConf.exists()) moduleConf.createNewFile();
+            Files.writeString(Path.of(moduleConf.getAbsolutePath()), obj.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    /**
-     * Use this to load your positions etc from a config file.
-     */
 
     public void load() {
-        //Your load-logic
-        save();
+        try {
+         File moduleConf = new File(Mod.CONFIG_DIR, getName() + ".json");
+            if (moduleConf.exists()) {
+                String content = Files.readString(Path.of(moduleConf.getAbsolutePath()));
+                JsonObject obj = JsonParser.parseString(content).getAsJsonObject();
+                setPosition(obj.get("x").getAsDouble(), obj.get("y").getAsDouble());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean isEnabled() {

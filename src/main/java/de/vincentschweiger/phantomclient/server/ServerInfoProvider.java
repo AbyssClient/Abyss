@@ -35,8 +35,6 @@ public class ServerInfoProvider {
         queriedPlayers.add(usableUUID);
         new Thread(() -> {
             Boolean bool = Mod.getInstance().getServerConnection().isPlayer(usableUUID);
-            if (usableUUID.startsWith("777"))
-                System.out.println(usableUUID);
             clientPlayers.put(usableUUID, bool);
         }).start();
         return false;
@@ -65,6 +63,8 @@ public class ServerInfoProvider {
                     return userCosmetics.wingsEnabled;
                 case "hat":
                     return userCosmetics.hatEnabled;
+                default:
+                    return false;
             }
         }
         if (queriedCosmeticPlayers.contains(usableUUID)) return false;

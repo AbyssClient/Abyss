@@ -1,6 +1,7 @@
 package de.vincentschweiger.phantomclient.mixins;
 
 import de.vincentschweiger.phantomclient.cosmetics.cape.CapeRenderer;
+import de.vincentschweiger.phantomclient.cosmetics.dragonwings.DragonwingsRenderer;
 import de.vincentschweiger.phantomclient.cosmetics.hat.HatRenderer;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -22,7 +23,7 @@ public abstract class MixinPlayerEntityRenderer extends LivingEntityRenderer<Abs
     @Inject(method = "<init>", at = @At(value = "TAIL"))
     public void inject(EntityRendererFactory.Context ctx, boolean slim, CallbackInfo ci) {
         this.addFeature(new CapeRenderer(this));
-        //this.addFeature(new DragonwingsRenderer<>(this, ctx.getModelLoader()));
+        this.addFeature(new DragonwingsRenderer<>(this, ctx.getModelLoader()));
         this.addFeature(new HatRenderer<>(this, ctx.getModelLoader()));
     }
 }

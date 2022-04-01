@@ -9,7 +9,8 @@
     "MixinInGameHud",
     "MixinMinecraftClient",
     "MinecraftClientAccessor",
-    "MixinPlayerEntityRenderer"
+    "MixinPlayerEntityRenderer",
+    "InvokerEntityModelLayers"
   ],
   "injectors": {
     "defaultRequire": 1
