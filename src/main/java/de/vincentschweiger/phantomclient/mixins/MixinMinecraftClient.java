@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MixinMinecraftClient {
 
     @Inject(method = "<init>", at = @At(value = "FIELD", target = "Lnet/minecraft/client/MinecraftClient;instance:Lnet/minecraft/client/MinecraftClient;", shift = At.Shift.AFTER))
-    public void onPreInit(RunArgs args, CallbackInfo ci){
+    public void onPreInit(RunArgs args, CallbackInfo ci) {
         Mod.getInstance().preInit();
     }
 

@@ -13,7 +13,7 @@ public class ModuleFPS extends UIModule {
         int fps = ((MinecraftClientAccessor) MinecraftClient.getInstance()).getCurrentFps();
         // FPS: 999
         // 999 FPS
-        return this.getState() == 0 ? "FPS: " + fps  : fps + " FPS";
+        return this.getState() == 0 ? "FPS: " + fps : fps + " FPS";
     }
 
     @Override

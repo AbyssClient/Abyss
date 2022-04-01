@@ -3,6 +3,8 @@ package de.vincentschweiger.phantomclient.modules;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import de.vincentschweiger.phantomclient.Mod;
+import de.vincentschweiger.phantomclient.modules.settings.impl.DoubleSetting;
+import de.vincentschweiger.phantomclient.modules.settings.impl.Setting;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
@@ -15,10 +17,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public abstract class UIModule {
+public abstract class UIModule extends Module {
 
     private double x, y;
-    private boolean enabled = true; // assigned so it's enabled by default when not using a config. if you implemented load/save methods, un-assign this and assign it from those methods.
     private int state;
     private int maxState;
     public MatrixStack stack = new MatrixStack();
@@ -58,8 +59,6 @@ public abstract class UIModule {
         this.y = y / MinecraftClient.getInstance().getWindow().getScaledHeight();
     }
 
-    public abstract String getName();
-
     public int getWidth() {
         return MinecraftClient.getInstance().textRenderer.getWidth(getText());
     }
@@ -69,39 +68,17 @@ public abstract class UIModule {
     }
 
     public void save() {
-        File moduleConf = new File(Mod.CONFIG_DIR, getName() + ".json");
-        JsonObject obj = new JsonObject();
-        obj.addProperty("x", getX());
-        obj.addProperty("y", getY());
-        try {
-            if (!Mod.CONFIG_DIR.exists()) Mod.CONFIG_DIR.mkdir();
-            if (!moduleConf.exists()) moduleConf.createNewFile();
-            Files.writeString(Path.of(moduleConf.getAbsolutePath()), obj.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        settings.put("x", new DoubleSetting(getX()));
+        settings.put("y", new DoubleSetting(getY()));
+        super.save();
     }
 
 
     public void load() {
-        try {
-         File moduleConf = new File(Mod.CONFIG_DIR, getName() + ".json");
-            if (moduleConf.exists()) {
-                String content = Files.readString(Path.of(moduleConf.getAbsolutePath()));
-                JsonObject obj = JsonParser.parseString(content).getAsJsonObject();
-                setPosition(obj.get("x").getAsDouble(), obj.get("y").getAsDouble());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public boolean isEnabled() {
-        return this.enabled;
-    }
-
-    public void switchEnabled() {
-        this.enabled = !this.enabled;
+        super.load();
+        double x = ((DoubleSetting) settings.get("x")).get();
+        double y = ((DoubleSetting) settings.get("y")).get();
+        setPosition(x, y);
     }
 
     public int getState() {

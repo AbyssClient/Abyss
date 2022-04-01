@@ -21,6 +21,7 @@ public class ServerInfoProvider {
     private static String getUsableUUID(String uuid) {
         return uuid.replaceAll("-", "");
     }
+
     private static String getUsableUUID(UUID uuid) {
         return getUsableUUID(uuid.toString());
     }

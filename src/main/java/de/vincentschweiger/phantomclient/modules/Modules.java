@@ -8,8 +8,6 @@ import java.util.List;
 
 public class Modules {
 
-    public static UIModule moduleFPS = new ModuleFPS();
-
     private static List<UIModule> registeredModules = new ArrayList<>();
 
     public static void registerModules(UIModule... modules) {
