@@ -1,6 +1,7 @@
 package de.vincentschweiger.phantomclient.cosmetics.hat;
 
 import de.vincentschweiger.phantomclient.cosmetics.CosmeticUtils;
+import de.vincentschweiger.phantomclient.server.ServerInfoProvider;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
@@ -21,7 +22,7 @@ public class HatRenderer<T extends LivingEntity, M extends PlayerEntityModel<T>>
     private HatModel<T> model;
     public static EntityModelLayer LAYER = new EntityModelLayer(new Identifier("phantom"), "hat");
 
-    public static Identifier texture = new Identifier("phantom", "hat.png");
+    public static Identifier texture = new Identifier("phantom", "textures/hat.png");
 
     public HatRenderer(FeatureRendererContext<T, M> context, EntityModelLoader loader) {
         super(context);
@@ -31,7 +32,7 @@ public class HatRenderer<T extends LivingEntity, M extends PlayerEntityModel<T>>
     @Override
     public void render(MatrixStack matrixStackIn, VertexConsumerProvider bufferIn, int packedLightIn, T entityLivingBaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float headYaw, float headPitch) {
         if (entityLivingBaseIn instanceof ClientPlayerEntity player) {
-                if (CosmeticUtils.checkClientUser(player)) {
+                if (CosmeticUtils.checkClientUser(player) && ServerInfoProvider.hasCosmetic(player.getGameProfile().getId(), "hat")) {
                 matrixStackIn.push();
                 VertexConsumer builder = bufferIn.getBuffer(RenderLayer.getEntityCutoutNoCull(texture));
                 if (!player.getEquippedStack(EquipmentSlot.HEAD).isEmpty()) {

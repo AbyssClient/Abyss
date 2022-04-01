@@ -30,7 +30,7 @@ public class Mod implements ModInitializer {
 	private static Mod instance;
 	KeyBinding kb;
 	@Getter
-	private Gson gson;
+	private static Gson gson = new Gson();
 	@Getter
 	private static ServerConnection serverConnection;
 

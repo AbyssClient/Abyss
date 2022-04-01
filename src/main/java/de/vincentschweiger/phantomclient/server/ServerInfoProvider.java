@@ -55,7 +55,7 @@ public class ServerInfoProvider {
         return cosmetics.get(usableUUID).wingsStyle;
     }
 
-    public static boolean hasCosmetic(String uuid, String cosmeticStr) {
+    public static boolean hasCosmetic(UUID uuid, String cosmeticStr) {
         String usableUUID = getUsableUUID(uuid);
         if (cosmetics.containsKey(usableUUID)) {
             UserCosmetics userCosmetics = cosmetics.get(usableUUID);
