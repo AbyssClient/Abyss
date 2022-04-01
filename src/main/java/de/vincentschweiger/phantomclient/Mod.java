@@ -1,24 +1,35 @@
 package de.vincentschweiger.phantomclient;
 
+import com.google.gson.Gson;
 import de.vincentschweiger.phantomclient.events.EventManager;
+import de.vincentschweiger.phantomclient.mixins.MinecraftClientAccessor;
 import de.vincentschweiger.phantomclient.modules.ModulePositionScreen;
 import de.vincentschweiger.phantomclient.modules.Modules;
 import de.vincentschweiger.phantomclient.modules.UIModule;
+import de.vincentschweiger.phantomclient.server.ServerConnection;
+import lombok.Getter;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.client.util.Session;
 import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Optional;
 
 public class Mod implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger("phantom");
 
 	private static Mod instance;
 	KeyBinding kb;
+	@Getter
+	private Gson gson;
+	@Getter
+	private ServerConnection serverConnection;
 
 	@Override
 	public void onInitialize() {
@@ -26,6 +37,9 @@ public class Mod implements ModInitializer {
 		ClientTickEvents.START_CLIENT_TICK.register((client) -> {
 			if (kb.wasPressed()) MinecraftClient.getInstance().setScreen(new ModulePositionScreen());
 		});
+		((MinecraftClientAccessor) MinecraftClient.getInstance()).setSession(new Session("phant0m_dev", "cafebabe-cafe-babe-yooo-yeahitsvento", "", Optional.of(""), Optional.of(""), Session.AccountType.MOJANG));
+		this.serverConnection = new ServerConnection();
+		this.serverConnection.setup();
 		LOGGER.info("Hello Fabric world!");
 	}
 
