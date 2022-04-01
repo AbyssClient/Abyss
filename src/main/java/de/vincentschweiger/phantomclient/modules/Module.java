@@ -10,16 +10,26 @@ import de.vincentschweiger.phantomclient.modules.settings.impl.Setting;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
 public abstract class Module {
-    private boolean enabled = true;
+    private boolean enabled;
     public Map<String, Setting> settings = new HashMap<>();
 
     public Module() {
+    }
+
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = BigDecimal.valueOf(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
     public boolean isEnabled() {
@@ -28,8 +38,13 @@ public abstract class Module {
 
     public abstract String getName();
 
+    public void existOrInsert(String key, Setting s) {
+        if (!settings.containsKey(key)) settings.put(key, s);
+    }
+
     public void switchEnabled() {
         this.enabled = !this.enabled;
+        settings.get("enabled").set(enabled);
     }
 
     public void save() {
@@ -53,25 +68,22 @@ public abstract class Module {
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
                     String type = entry.getValue().getAsJsonObject().get("type").getAsString();
                     switch (type) {
-                        case "boolean":
-                            settings.put(entry.getKey(), new BooleanSetting(
-                                    entry.getValue().getAsJsonObject().get("value")
-                                            .getAsBoolean()
-                            ));
-                            break;
-                        case "double":
-                            settings.put(entry.getKey(), new DoubleSetting(
-                                    entry.getValue().getAsJsonObject().get("value")
-                                            .getAsDouble()
-                            ));
-                            break;
-                        default:
-                            Mod.LOGGER.warn("Unrecognized setting type in " + moduleConf.getName());
+                        case "boolean" -> settings.put(entry.getKey(), new BooleanSetting(
+                                entry.getValue().getAsJsonObject().get("value")
+                                        .getAsBoolean()
+                        ));
+                        case "double" -> settings.put(entry.getKey(), new DoubleSetting(
+                                entry.getValue().getAsJsonObject().get("value")
+                                        .getAsDouble()
+                        ));
+                        default -> Mod.LOGGER.warn("Unrecognized setting type in " + moduleConf.getName());
                     }
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        existOrInsert("enabled", new BooleanSetting(false));
+        this.enabled = ((BooleanSetting) settings.get("enabled")).get();
     }
 }

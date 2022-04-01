@@ -1,21 +1,12 @@
 package de.vincentschweiger.phantomclient.modules;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import de.vincentschweiger.phantomclient.Mod;
 import de.vincentschweiger.phantomclient.modules.settings.impl.DoubleSetting;
-import de.vincentschweiger.phantomclient.modules.settings.impl.Setting;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Style;
-import org.spongepowered.include.com.google.gson.JsonElement;
 
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 public abstract class UIModule extends Module {
 
@@ -57,6 +48,8 @@ public abstract class UIModule extends Module {
     public void setPosition(double x, double y) {
         this.x = x / MinecraftClient.getInstance().getWindow().getScaledWidth();
         this.y = y / MinecraftClient.getInstance().getWindow().getScaledHeight();
+        settings.get("x").set(round(getX(),2));
+        settings.get("y").set(round(getY(), 2));
     }
 
     public int getWidth() {
@@ -67,15 +60,10 @@ public abstract class UIModule extends Module {
         return 9;
     }
 
-    public void save() {
-        settings.put("x", new DoubleSetting(getX()));
-        settings.put("y", new DoubleSetting(getY()));
-        super.save();
-    }
-
-
     public void load() {
         super.load();
+        existOrInsert("x",new DoubleSetting(0.0));
+        existOrInsert("y", new DoubleSetting(0.0));
         double x = ((DoubleSetting) settings.get("x")).get();
         double y = ((DoubleSetting) settings.get("y")).get();
         setPosition(x, y);
