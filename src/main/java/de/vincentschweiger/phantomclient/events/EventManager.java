@@ -1,5 +1,9 @@
 package de.vincentschweiger.phantomclient.events;
 
+import de.vincentschweiger.phantomclient.events.impl.ScreenEvent;
+import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -98,7 +102,7 @@ public class EventManager {
             }
 
         } else {
-            REGISTRY_MAP.put((Class<? extends Event>) clazz, new ArrayList<EventData>() {
+            REGISTRY_MAP.put((Class<? extends Event>) clazz, new ArrayList<>() {
 
                 {
                     this.add(methodData);

@@ -3,6 +3,7 @@ package de.vincentschweiger.phantomclient.modules;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
+import net.minecraft.text.NbtText;
 
 public class ModulePositionScreen extends Screen {
 
@@ -33,6 +34,8 @@ public class ModulePositionScreen extends Screen {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        // Left click to drag
+        // Right click to toggle
         if (button == 0) {
             Modules.getRegisteredModules().forEach(m -> {
                 if (mouseX >= m.getX() && mouseY >= m.getY() && mouseX <= m.getX() + m.getWidth() && mouseY <= m.getY() + m.getHeight())

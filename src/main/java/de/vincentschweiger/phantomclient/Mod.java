@@ -13,6 +13,7 @@ import de.vincentschweiger.phantomclient.modules.impl.ModuleClock;
 import de.vincentschweiger.phantomclient.modules.impl.ModuleFPS;
 import de.vincentschweiger.phantomclient.server.ServerConnection;
 import lombok.Getter;
+import net.ccbluex.liquidbounce.render.ultralight.hooks.UltralightScreenHook;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
@@ -61,6 +62,8 @@ public class Mod implements ModInitializer {
 
     public void preInit() {
         EventManager.register(new de.vincentschweiger.phantomclient.listeners.EventListener());
+        EventManager.register(UltralightScreenHook.INSTANCE);
+        EventManager.register(new net.ccbluex.liquidbounce.render.ultralight.hooks.UltralightIntegrationHook());
         Modules.registerModules(new ModuleFPS());
         Modules.registerModules(new ModuleClock());
     }

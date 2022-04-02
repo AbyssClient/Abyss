@@ -13,6 +13,6 @@ public class MixinInGameHud {
 
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;renderAutosaveIndicator(Lnet/minecraft/client/util/math/MatrixStack;)V", shift = At.Shift.AFTER))
     public void inject(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
-        new RenderOverlayEvent().call();
+        new RenderOverlayEvent(matrices).call();
     }
 }
