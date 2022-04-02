@@ -5,9 +5,8 @@ import de.vincentschweiger.phantomclient.cosmetics.dragonwings.DragonwingsRender
 import de.vincentschweiger.phantomclient.cosmetics.hat.HatModel
 import de.vincentschweiger.phantomclient.cosmetics.hat.HatRenderer
 import de.vincentschweiger.phantomclient.event.*
-import de.vincentschweiger.phantomclient.modules.PositioningScreen
-import de.vincentschweiger.phantomclient.modules.impl.ModuleClock
-import de.vincentschweiger.phantomclient.modules.impl.ModuleFPS
+import de.vincentschweiger.phantomclient.module.ModuleManager
+import de.vincentschweiger.phantomclient.module.PositioningScreen
 import de.vincentschweiger.phantomclient.server.ServerConnection
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry
@@ -36,8 +35,7 @@ object Phantom : Listenable {
             serverConnection.setup()
             EntityModelLayerRegistry.registerModelLayer(HatRenderer.LAYER) { HatModel.getTexturedModelData() }
             EntityModelLayerRegistry.registerModelLayer(DragonwingsRenderer.LAYER) { DragonwingsModel.getTexturedModelData() }
-            ModuleFPS()
-            ModuleClock()
+            ModuleManager.registerInbuilt()
             EventManager
         }
     }
