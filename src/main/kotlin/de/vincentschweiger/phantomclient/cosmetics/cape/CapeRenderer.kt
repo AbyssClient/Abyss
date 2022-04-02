@@ -52,7 +52,7 @@ class CapeRenderer(featureRendererContext: FeatureRendererContext<AbstractClient
         if (pLivingEntity.isSneaking) {
             f1 += 25.0f
         }
-        var f5 = StutterFix.getAverageFrameTimeSec() * 20.0f
+        var f5 = StutterFix.averageFrameTimeSec * 20.0f
         f5 = StutterFix.limit(f5, 0.02f, 1.0f)
         capeRotateX = MathHelper.lerp(f5, capeRotateX, 6.0f + f2 / 2.0f + f1)
         capeRotateZ = MathHelper.lerp(f5, capeRotateZ, f3 / 2.0f)
