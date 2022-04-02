@@ -40,13 +40,12 @@ object ServerConnection {
     init {
         try {
             connect()
-            setup()
         } catch (e: IOException) {
             e.printStackTrace()
         }
     }
 
-    private fun setup() {
+    fun setup() {
         try {
             val meMsg = "ME " + MinecraftClient.getInstance().session.uuid.replace("-".toRegex(), "")
             outputStream!!.writeInt(meMsg.length)

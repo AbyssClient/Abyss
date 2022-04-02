@@ -1,16 +1,11 @@
 package de.vincentschweiger.phantomclient
 
 import de.vincentschweiger.phantomclient.cosmetics.CosmeticManager
-import de.vincentschweiger.phantomclient.cosmetics.dragonwings.DragonwingsModel
-import de.vincentschweiger.phantomclient.cosmetics.dragonwings.DragonwingsRenderer
-import de.vincentschweiger.phantomclient.cosmetics.hat.HatModel
-import de.vincentschweiger.phantomclient.cosmetics.hat.HatRenderer
 import de.vincentschweiger.phantomclient.event.*
 import de.vincentschweiger.phantomclient.module.ModuleManager
 import de.vincentschweiger.phantomclient.module.PositioningScreen
 import de.vincentschweiger.phantomclient.socket.ServerConnection
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
-import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.option.KeyBinding
@@ -37,6 +32,7 @@ object Phantom : Listenable {
     val startHandler = handler<ClientStartEvent> {
         runCatching {
             logger.info("Launching $CLIENT_NAME v$CLIENT_VERSION by $CLIENT_AUTHOR")
+            serverConnection.setup()
             // Stuff
             EventManager
             ModuleManager
