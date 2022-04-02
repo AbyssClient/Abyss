@@ -1,7 +1,6 @@
 package de.vincentschweiger.phantomclient.server;
 
-import de.vincentschweiger.phantomclient.Mod;
-import net.minecraft.client.MinecraftClient;
+import de.vincentschweiger.phantomclient.Phantom;
 import phantom.models.EnumRanks;
 import phantom.models.HatStyle;
 import phantom.models.UserCosmetics;
@@ -35,7 +34,7 @@ public class ServerInfoProvider {
         if (queriedPlayers.contains(usableUUID)) return false;
         queriedPlayers.add(usableUUID);
         new Thread(() -> {
-            Boolean bool = Mod.getInstance().getServerConnection().isPlayer(usableUUID);
+            Boolean bool = Phantom.INSTANCE.getServerConnection().isPlayer(usableUUID);
             clientPlayers.put(usableUUID, bool);
         }).start();
         return false;
@@ -71,7 +70,7 @@ public class ServerInfoProvider {
         if (queriedCosmeticPlayers.contains(usableUUID)) return false;
         queriedCosmeticPlayers.add(usableUUID);
         new Thread(() -> {
-            UserCosmetics cosmeticObj = Mod.getInstance().getServerConnection().getCosmetics(usableUUID);
+            UserCosmetics cosmeticObj = Phantom.INSTANCE.getServerConnection().getCosmetics(usableUUID);
             cosmetics.put(usableUUID, cosmeticObj);
         }).start();
         return false;
@@ -87,7 +86,7 @@ public class ServerInfoProvider {
             if (queriedRanksPlayers.contains(usableUUID)) return EnumRanks.NULL;
         queriedRanksPlayers.add(usableUUID);
         new Thread(() -> {
-            EnumRanks rank = Mod.getInstance().getServerConnection().getRank(usableUUID);
+            EnumRanks rank = Phantom.INSTANCE.getServerConnection().getRank(usableUUID);
             ranks.put(usableUUID, rank);
         }).start();
         return EnumRanks.NULL;

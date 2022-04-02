@@ -2,7 +2,6 @@
   "schemaVersion": 1,
   "id": "phantom",
   "version": "${version}",
-
   "name": "Phantom Client",
   "description": "This is an example description! Tell everyone what your mod is about!",
   "authors": [
@@ -12,15 +11,11 @@
     "homepage": "https://fabricmc.net/",
     "sources": "https://github.com/FabricMC/fabric-example-mod"
   },
-
   "license": "CC0-1.0",
   "icon": "assets/phantom/icon.png",
-
   "environment": "*",
   "entrypoints": {
-    "main": [
-      "de.vincentschweiger.phantomclient.Mod"
-    ],
+    "main": [],
     "preLaunch": [
       "de.vincentschweiger.phantomclient.PreLaunch"
     ]
@@ -28,7 +23,6 @@
   "mixins": [
     "phantom.mixins.json"
   ],
-
   "depends": {
     "fabricloader": ">=0.13.3",
     "fabric": "*",
