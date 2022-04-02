@@ -1,9 +1,6 @@
 package de.vincentschweiger.phantomclient.mixins;
 
-import de.vincentschweiger.phantomclient.events.impl.MouseButtonEvent;
-import de.vincentschweiger.phantomclient.events.impl.MouseCursorEvent;
-import de.vincentschweiger.phantomclient.events.impl.MouseRotationEvent;
-import de.vincentschweiger.phantomclient.events.impl.MouseScrollEvent;
+import de.vincentschweiger.phantomclient.event.*;
 import net.minecraft.client.Mouse;
 import net.minecraft.client.network.ClientPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,7 +17,7 @@ public class MixinMouse {
      */
     @Inject(method = "onMouseButton", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MinecraftClient;getOverlay()Lnet/minecraft/client/gui/screen/Overlay;", shift = At.Shift.BEFORE))
     private void hookMouseButton(long window, int button, int action, int mods, CallbackInfo callbackInfo) {
-        new MouseButtonEvent(window, button, action, mods).call();
+        EventManager.INSTANCE.callEvent(new MouseButtonEvent(window, button, action, mods));
     }
 
     /**
@@ -28,7 +25,7 @@ public class MixinMouse {
      */
     @Inject(method = "onMouseScroll", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MinecraftClient;getOverlay()Lnet/minecraft/client/gui/screen/Overlay;", shift = At.Shift.BEFORE))
     private void hookMouseScroll(long window, double horizontal, double vertical, CallbackInfo callbackInfo) {
-        new MouseScrollEvent(window, horizontal, vertical).call();
+        EventManager.INSTANCE.callEvent(new MouseScrollEvent(window, horizontal, vertical));
     }
 
     /**
@@ -36,7 +33,7 @@ public class MixinMouse {
      */
     @Inject(method = "onCursorPos", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/MinecraftClient;getOverlay()Lnet/minecraft/client/gui/screen/Overlay;", shift = At.Shift.BEFORE))
     private void hookCursorPos(long window, double x, double y, CallbackInfo callbackInfo) {
-        new MouseCursorEvent(window, x, y).call();
+        EventManager.INSTANCE.callEvent(new MouseCursorEvent(window, x, y));
     }
 
     /**
@@ -45,7 +42,7 @@ public class MixinMouse {
     @Redirect(method = "updateMouse", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;changeLookDirection(DD)V"), require = 1, allow = 1)
     private void hookUpdateMouse(ClientPlayerEntity entity, double cursorDeltaX, double cursorDeltaY) {
         final MouseRotationEvent event = new MouseRotationEvent(cursorDeltaX, cursorDeltaY);
-        event.call();
+        EventManager.INSTANCE.callEvent(event);
         if (event.isCancelled())
             return;
         entity.changeLookDirection(event.getCursorDeltaX(), event.getCursorDeltaY());

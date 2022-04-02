@@ -22,8 +22,8 @@ public abstract class MixinPlayerEntityRenderer extends LivingEntityRenderer<Abs
 
     @Inject(method = "<init>", at = @At(value = "TAIL"))
     public void inject(EntityRendererFactory.Context ctx, boolean slim, CallbackInfo ci) {
-        this.addFeature(new CapeRenderer(this));
-        this.addFeature(new DragonwingsRenderer<>(this, ctx.getModelLoader()));
-        this.addFeature(new HatRenderer<>(this, ctx.getModelLoader()));
+        //this.addFeature(new CapeRenderer(this));
+        //this.addFeature(new DragonwingsRenderer<>(this, ctx.getModelLoader()));
+        //this.addFeature(new HatRenderer<>(this, ctx.getModelLoader()));
     }
 }

@@ -1,6 +1,6 @@
 package de.vincentschweiger.phantomclient.server;
 
-import de.vincentschweiger.phantomclient.Mod;
+import com.google.gson.Gson;
 import net.minecraft.client.MinecraftClient;
 import org.apache.commons.lang3.EnumUtils;
 import phantom.models.EnumRanks;
@@ -27,6 +27,7 @@ public class ServerConnection {
     private DataOutputStream os;
     private DataInputStream is;
     private Socket socket;
+    private Gson gson;
 
     public void reconnect() {
         try {
@@ -39,6 +40,7 @@ public class ServerConnection {
     }
 
     public ServerConnection() {
+        this.gson = new Gson();
         try {
             socket = new Socket(host, port);
             os = new DataOutputStream((socket.getOutputStream()));
@@ -92,7 +94,7 @@ public class ServerConnection {
             byte[] buff = new byte[length];
             is.readFully(buff);
             String s = new String(buff);
-            return Mod.getInstance().getGson().fromJson(s, UserCosmetics.class);
+            return gson.fromJson(s, UserCosmetics.class);
         } catch (IOException e) {
             e.printStackTrace();
         }

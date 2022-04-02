@@ -1,7 +1,8 @@
 package de.vincentschweiger.phantomclient.mixins;
 
-import de.vincentschweiger.phantomclient.events.impl.WindowFocusEvent;
-import de.vincentschweiger.phantomclient.events.impl.WindowResizeEvent;
+import de.vincentschweiger.phantomclient.event.EventManager;
+import de.vincentschweiger.phantomclient.event.WindowFocusEvent;
+import de.vincentschweiger.phantomclient.event.WindowResizeEvent;
 import net.minecraft.client.util.Window;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -21,7 +22,7 @@ public class MixinWindow {
     @Inject(method = "onWindowSizeChanged", at = @At("HEAD"))
     public void hookResize(long window, int width, int height, CallbackInfo callbackInfo) {
         if (window == handle) {
-            new WindowResizeEvent(window, width, height).call();
+            EventManager.INSTANCE.callEvent(new WindowResizeEvent(window, width, height));
         }
     }
 
@@ -30,7 +31,7 @@ public class MixinWindow {
      */
     @Inject(method = "onWindowFocusChanged", at = @At(value = "FIELD", target = "Lnet/minecraft/client/util/Window;eventHandler:Lnet/minecraft/client/WindowEventHandler;"))
     public void hookFocus(long window, boolean focused, CallbackInfo callbackInfo) {
-        new WindowFocusEvent(window, focused).call();
+        EventManager.INSTANCE.callEvent(new WindowFocusEvent(window, focused));
     }
 
 

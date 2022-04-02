@@ -1,7 +1,8 @@
 package de.vincentschweiger.phantomclient.mixins;
 
-import de.vincentschweiger.phantomclient.events.impl.GameRenderEvent;
-import de.vincentschweiger.phantomclient.events.impl.ScreenRenderEvent;
+import de.vincentschweiger.phantomclient.event.EventManager;
+import de.vincentschweiger.phantomclient.event.GameRenderEvent;
+import de.vincentschweiger.phantomclient.event.ScreenRenderEvent;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -18,7 +19,7 @@ public class MixinGameRenderer {
      */
     @Inject(method = "render", at = @At("HEAD"))
     public void hookGameRender(CallbackInfo callbackInfo) {
-        new GameRenderEvent().call();
+        EventManager.INSTANCE.callEvent(new GameRenderEvent());
     }
 
     /**
@@ -27,7 +28,7 @@ public class MixinGameRenderer {
     @Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/Screen;render(Lnet/minecraft/client/util/math/MatrixStack;IIF)V"))
     public void hookScreenRender(Screen screen, MatrixStack matrices, int mouseX, int mouseY, float delta) {
         screen.render(matrices, mouseX, mouseY, delta);
-        new ScreenRenderEvent(screen, matrices, mouseX, mouseY, delta).call();
+        EventManager.INSTANCE.callEvent(new ScreenRenderEvent(screen, matrices, mouseX, mouseY, delta));
     }
 
 }
