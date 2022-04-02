@@ -1,5 +1,7 @@
 package de.vincentschweiger.phantomclient.modules
 
+import de.vincentschweiger.phantomclient.event.OverlayRenderEvent
+import de.vincentschweiger.phantomclient.event.handler
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.text.LiteralText
@@ -13,6 +15,11 @@ abstract class UIModule : Module() {
         private set
     open val maxState = 0
     var stack = MatrixStack()
+
+    val renderHandler = handler<OverlayRenderEvent> {
+        render(isEnabled)
+    }
+
     fun render(enabled: Boolean) {
         stack.push()
         if (enabled) {

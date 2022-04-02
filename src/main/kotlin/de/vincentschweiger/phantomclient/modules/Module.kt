@@ -1,9 +1,10 @@
 package de.vincentschweiger.phantomclient.modules
 
+import de.vincentschweiger.phantomclient.event.Listenable
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-abstract class Module {
+abstract class Module : Listenable {
     var isEnabled = true
         private set
 

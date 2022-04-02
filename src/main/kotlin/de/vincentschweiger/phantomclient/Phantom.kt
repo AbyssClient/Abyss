@@ -5,8 +5,6 @@ import de.vincentschweiger.phantomclient.cosmetics.dragonwings.DragonwingsRender
 import de.vincentschweiger.phantomclient.cosmetics.hat.HatModel
 import de.vincentschweiger.phantomclient.cosmetics.hat.HatRenderer
 import de.vincentschweiger.phantomclient.event.*
-import de.vincentschweiger.phantomclient.listeneres.OverlayListener
-import de.vincentschweiger.phantomclient.modules.Modules
 import de.vincentschweiger.phantomclient.modules.PositioningScreen
 import de.vincentschweiger.phantomclient.modules.impl.ModuleClock
 import de.vincentschweiger.phantomclient.modules.impl.ModuleFPS
@@ -25,7 +23,7 @@ object Phantom : Listenable {
     const val CLIENT_NAME = "Phantom"
     val configDir = File(CLIENT_NAME)
     val serverConnection: ServerConnection = ServerConnection()
-    private val logger: Logger = LoggerFactory.getLogger(CLIENT_NAME);
+    val logger: Logger = LoggerFactory.getLogger(CLIENT_NAME);
     private val kb: KeyBinding = KeyBindingHelper.registerKeyBinding(net.minecraft.client.option.KeyBinding("phantom.keybinding.positioning", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_RIGHT_SHIFT, "Phantom"))
 
     val tickHandler = handler<GameTickEvent> {
@@ -38,20 +36,13 @@ object Phantom : Listenable {
             serverConnection.setup()
             EntityModelLayerRegistry.registerModelLayer(HatRenderer.LAYER) { HatModel.getTexturedModelData() }
             EntityModelLayerRegistry.registerModelLayer(DragonwingsRenderer.LAYER) { DragonwingsModel.getTexturedModelData() }
-            Modules.registerModule(ModuleFPS())
-            Modules.registerModule(ModuleClock())
-            Modules.getRegisteredModules().forEach {
-                it.load()
-            }
+            ModuleFPS()
+            ModuleClock()
             EventManager
-            OverlayListener
         }
     }
 
     val shutdownHandler = handler<ClientShutdownEvent> {
         logger.info("Shutting down client...")
-        Modules.getRegisteredModules().forEach {
-            it.save()
-        }
     }
 }
