@@ -14,7 +14,8 @@
     "MixinGameRenderer",
     "MixinWindow",
     "MixinMouse",
-    "MixinKeyboard"
+    "MixinKeyboard",
+    "GameOptionsAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

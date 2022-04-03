@@ -23,7 +23,7 @@ object Phantom : Listenable {
     val configDir = File(CLIENT_NAME)
     val serverConnection = ServerConnection
     val logger: Logger = LoggerFactory.getLogger(CLIENT_NAME)!!;
-    private val kb: KeyBinding = KeyBindingHelper.registerKeyBinding(net.minecraft.client.option.KeyBinding("phantom.keybinding.positioning", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_RIGHT_SHIFT, "Phantom"))
+    private val kb: KeyBinding = KeyBindingHelper.registerKeyBinding(KeyBinding("phantom.keybinding.positioning", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_RIGHT_SHIFT, "Phantom"))
 
     val tickHandler = handler<GameTickEvent> {
         if (kb.wasPressed()) MinecraftClient.getInstance().setScreen(PositioningScreen())

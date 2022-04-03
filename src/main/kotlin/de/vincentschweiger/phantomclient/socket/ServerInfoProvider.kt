@@ -68,7 +68,7 @@ object ServerInfoProvider {
 
     private val queriedRanksPlayers = ArrayList<String>()
     private val ranks: MutableMap<String, EnumRanks> = HashMap()
-    fun getRank(uuid: String, cosmetic: String?): EnumRanks {
+    fun getRank(uuid: String): EnumRanks {
         val usableUUID = getUsableUUID(uuid)
         if (ranks.containsKey(usableUUID)) if (queriedRanksPlayers.contains(usableUUID)) return EnumRanks.NULL
         queriedRanksPlayers.add(usableUUID)
