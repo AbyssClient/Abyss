@@ -18,4 +18,6 @@ open class Module : Listenable {
     open fun getName(): String {
         return ""
     }
+
+    open fun init() {}
 }

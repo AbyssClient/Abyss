@@ -13,16 +13,14 @@ import net.minecraft.client.util.InputUtil
 import org.lwjgl.glfw.GLFW
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import java.io.File
 
 object Phantom : Listenable {
     const val CLIENT_NAME = "Phantom"
     val CLIENT_VERSION: String = FabricLoader.getInstance().getModContainer("phantom").get().metadata.version.friendlyString
     const val CLIENT_AUTHOR = "Vento"
 
-    val configDir = File(CLIENT_NAME)
     val serverConnection = ServerConnection
-    val logger: Logger = LoggerFactory.getLogger(CLIENT_NAME)!!;
+    val logger: Logger = LoggerFactory.getLogger(CLIENT_NAME)!!
     private val kb: KeyBinding = KeyBindingHelper.registerKeyBinding(KeyBinding("phantom.keybinding.positioning", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_RIGHT_SHIFT, "Phantom"))
 
     val tickHandler = handler<GameTickEvent> {
