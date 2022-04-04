@@ -1,6 +1,5 @@
 package de.vincentschweiger.phantomclient.event
 
-import de.vincentschweiger.phantomclient.config.Value
 import de.vincentschweiger.phantomclient.utils.client.Nameable
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
@@ -13,7 +12,6 @@ import net.minecraft.network.Packet
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.shape.VoxelShape
-import org.apache.http.client.methods.Configurable
 
 // Game events
 
@@ -160,9 +158,6 @@ class PacketEvent(val origin: TransferOrigin, val packet: Packet<*>) : Cancellab
 enum class TransferOrigin {
     SEND, RECEIVE
 }
-
-// Config events
-class ValueChangedEvent(val value: Value<*>) : Event()
 
 // Client events
 

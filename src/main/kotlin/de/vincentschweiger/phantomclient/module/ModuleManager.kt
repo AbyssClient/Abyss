@@ -27,12 +27,20 @@ object ModuleManager : Listenable, Iterable<de.vincentschweiger.phantomclient.mo
         addModule(module)
     }
 
+    /**
+     * Initialize and add a module
+     *
+     * @param module The Module to add
+     */
     fun addModule(module: Module) {
-        //module.initConfigurable()
-        //module.init()
+        module.initConfig()
+        module.init()
         modules += module
     }
 
+    /**
+     * @return A list of UIModules (Modules with UI)
+     */
     fun getUIModules(): List<UIModule> {
         val uimodules = mutableListOf<UIModule>()
         modules.forEach {
@@ -41,6 +49,10 @@ object ModuleManager : Listenable, Iterable<de.vincentschweiger.phantomclient.mo
         return uimodules
     }
 
+    /**
+     * ?Autocomplete module names ig?
+     * stolen from liquidbounce
+     */
     fun autoComplete(begin: String, validator: (Module) -> Boolean = { true }): List<String> {
         return filter { it.getName().startsWith(begin, true) && validator(it) }.map { it.getName() }
     }
