@@ -14,19 +14,6 @@ object EventManager {
 
     val mappedEvents = arrayOf(
             GameTickEvent::class,
-            PlayerTickEvent::class,
-            PlayerNetworkMovementTickEvent::class,
-            PlayerPushOutEvent::class,
-            PlayerMoveEvent::class,
-            EngineRenderEvent::class,
-            OverlayRenderEvent::class,
-            InputHandleEvent::class,
-            KeyEvent::class,
-            AttackEvent::class,
-            SessionEvent::class,
-            ScreenEvent::class,
-            ChatSendEvent::class,
-            PacketEvent::class,
             ClientStartEvent::class,
             ClientShutdownEvent::class
     ).map { Pair(it.findAnnotation<Nameable>()!!.name, it) }

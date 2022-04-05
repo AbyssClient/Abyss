@@ -15,7 +15,9 @@
     "MixinWindow",
     "MixinMouse",
     "MixinKeyboard",
-    "GameOptionsAccessor"
+    "GameOptionsAccessor",
+    "MixinScreen",
+    "MixinClientPlayerEntity"
   ],
   "injectors": {
     "defaultRequire": 1

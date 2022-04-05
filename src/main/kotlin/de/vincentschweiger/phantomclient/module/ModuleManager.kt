@@ -7,8 +7,7 @@ import de.vincentschweiger.phantomclient.module.impl.FpsModule
 private val modules = mutableListOf<Module>()
 
 object ModuleManager : Listenable, Iterable<Module> by modules {
-
-
+    
     init {
         ConfigSystem.root("modules", modules)
     }

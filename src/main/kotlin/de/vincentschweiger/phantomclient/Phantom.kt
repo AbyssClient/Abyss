@@ -1,5 +1,6 @@
 package de.vincentschweiger.phantomclient
 
+import de.vincentschweiger.phantomclient.command.CommandManager
 import de.vincentschweiger.phantomclient.config.ConfigSystem
 import de.vincentschweiger.phantomclient.cosmetics.CosmeticManager
 import de.vincentschweiger.phantomclient.event.*
@@ -43,9 +44,11 @@ object Phantom : Listenable {
             EventManager
             ConfigSystem
             ModuleManager
+            CommandManager
             CosmeticManager
-            // Register modules
+            // Register commands & modules
             ModuleManager.registerInbuilt()
+            CommandManager.registerInbuilt()
             // Load config
             ConfigSystem.load()
         }.onSuccess {
