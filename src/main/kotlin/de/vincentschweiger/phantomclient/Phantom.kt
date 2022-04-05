@@ -7,14 +7,17 @@ import de.vincentschweiger.phantomclient.event.*
 import de.vincentschweiger.phantomclient.module.ModuleManager
 import de.vincentschweiger.phantomclient.module.PositioningScreen
 import de.vincentschweiger.phantomclient.socket.ServerConnection
+import de.vincentschweiger.phantomclient.utils.client.outputString
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.option.KeyBinding
 import net.minecraft.client.util.InputUtil
+import net.minecraft.text.TranslatableText
 import org.lwjgl.glfw.GLFW
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import java.io.File
 import kotlin.system.exitProcess
 
 object Phantom : Listenable {

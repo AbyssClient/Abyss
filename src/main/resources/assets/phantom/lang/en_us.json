@@ -2,7 +2,6 @@
   "phantom.keybinding.positioning": "Positioning GUI",
   "phantom.generic.enabled": "Enabled",
   "phantom.generic.disabled": "Disabled",
-
   "phantom.commands.exceptionOccurred": "Failed to execute command. %s",
   "phantom.commands.invalidParameterValue": "Invalid argument \"%s\" for parameter \"%s\". %s",
   "phantom.commands.unknownCommand": "Command \"%s\" was not found.",
