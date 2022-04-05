@@ -1,6 +1,6 @@
 package de.vincentschweiger.phantomclient
 
-import de.vincentschweiger.phantomclient.config.DefaultConfig
+import de.vincentschweiger.phantomclient.config.ConfigSystem
 import de.vincentschweiger.phantomclient.cosmetics.CosmeticManager
 import de.vincentschweiger.phantomclient.event.*
 import de.vincentschweiger.phantomclient.module.ModuleManager
@@ -14,14 +14,12 @@ import net.minecraft.client.util.InputUtil
 import org.lwjgl.glfw.GLFW
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import java.io.File
+import kotlin.system.exitProcess
 
 object Phantom : Listenable {
     const val CLIENT_NAME = "Phantom"
     val CLIENT_VERSION: String = FabricLoader.getInstance().getModContainer("phantom").get().metadata.version.friendlyString
     const val CLIENT_AUTHOR = "Vento"
-
-    val config = DefaultConfig(File("$CLIENT_NAME.json"))
 
     val serverConnection = ServerConnection
     val logger: Logger = LoggerFactory.getLogger(CLIENT_NAME)!!
@@ -43,10 +41,18 @@ object Phantom : Listenable {
             serverConnection.setup()
             // Stuff
             EventManager
+            ConfigSystem
             ModuleManager
             CosmeticManager
             // Register modules
             ModuleManager.registerInbuilt()
+            // Load config
+            ConfigSystem.load()
+        }.onSuccess {
+            logger.info("Successfully loaded client!")
+        }.onFailure {
+            logger.error("Unable to load client.", it)
+            exitProcess(1)
         }
     }
 
@@ -55,7 +61,7 @@ object Phantom : Listenable {
      */
     val shutdownHandler = handler<ClientShutdownEvent> {
         logger.info("Shutting down phantom ...")
-        config.save()
+        ConfigSystem.store()
         serverConnection.close()
     }
 }

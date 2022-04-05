@@ -19,8 +19,8 @@ interface Listenable {
 }
 
 inline fun <reified T : Event> Listenable.handler(ignoreCondition: Boolean = false, priority: Int = 0, noinline handler: Handler<T>) {
-    println("Registering event hook")
-    println(T::class.java)
+    //println("Registering event hook")
+    //println(T::class.java)
     EventManager.registerEventHook(T::class.java, EventHook(this, handler, ignoreCondition, priority))
 }
 
@@ -35,9 +35,7 @@ inline fun <reified T : Event> Listenable.sequenceHandler(ignoreCondition: Boole
  * Registers a repeatable sequence which repeats the execution of code.
  */
 fun Listenable.repeatable(eventHandler: (SuspendableHandler<DummyEvent>)) {
-    /*
     var sequence: RepeatingSequence? = null
-
     handler<ToggleModuleEvent>(ignoreCondition = true) {
         if (this == it.module || this.parent() == it.module) {
             if (this.handleEvents()) {
@@ -50,5 +48,4 @@ fun Listenable.repeatable(eventHandler: (SuspendableHandler<DummyEvent>)) {
             }
         }
     }
-     */
 }

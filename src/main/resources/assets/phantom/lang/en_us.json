@@ -1,3 +1,5 @@
 {
-  "phantom.keybinding.positioning": "Positioning GUI"
+  "phantom.keybinding.positioning": "Positioning GUI",
+  "phantom.generic.enabled": "Enabled",
+  "phantom.generic.disabled": "Disabled"
 }

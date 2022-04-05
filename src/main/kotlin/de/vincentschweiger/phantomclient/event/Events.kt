@@ -1,5 +1,6 @@
 package de.vincentschweiger.phantomclient.event
 
+import de.vincentschweiger.phantomclient.config.Value
 import de.vincentschweiger.phantomclient.utils.client.Nameable
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
@@ -166,3 +167,10 @@ class ClientStartEvent : Event()
 
 @Nameable("clientShutdown")
 class ClientShutdownEvent : Event()
+
+// Config events
+@Nameable("valueChanged")
+class ValueChangedEvent(val value: Value<*>) : Event()
+
+@Nameable("toggleModule")
+class ToggleModuleEvent(val module: de.vincentschweiger.phantomclient.module.Module, val newState: Boolean) : Event()

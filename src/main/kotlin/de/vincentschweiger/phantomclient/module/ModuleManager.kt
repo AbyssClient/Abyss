@@ -1,11 +1,17 @@
 package de.vincentschweiger.phantomclient.module
 
+import de.vincentschweiger.phantomclient.config.ConfigSystem
 import de.vincentschweiger.phantomclient.event.Listenable
 import de.vincentschweiger.phantomclient.module.impl.FpsModule
 
 private val modules = mutableListOf<Module>()
 
-object ModuleManager : Listenable, Iterable<de.vincentschweiger.phantomclient.module.Module> by modules {
+object ModuleManager : Listenable, Iterable<Module> by modules {
+
+
+    init {
+        ConfigSystem.root("modules", modules)
+    }
 
     /**
      * Register inbuilt client modules
@@ -15,7 +21,7 @@ object ModuleManager : Listenable, Iterable<de.vincentschweiger.phantomclient.mo
                 FpsModule
         )
         builtin.apply {
-            sortBy { it.getName() }
+            sortBy { it.name }
             forEach(::addModule)
         }
     }
@@ -33,7 +39,7 @@ object ModuleManager : Listenable, Iterable<de.vincentschweiger.phantomclient.mo
      * @param module The Module to add
      */
     fun addModule(module: Module) {
-        module.initConfig()
+        module.initConfigurable()
         module.init()
         modules += module
     }
@@ -54,6 +60,6 @@ object ModuleManager : Listenable, Iterable<de.vincentschweiger.phantomclient.mo
      * stolen from liquidbounce
      */
     fun autoComplete(begin: String, validator: (Module) -> Boolean = { true }): List<String> {
-        return filter { it.getName().startsWith(begin, true) && validator(it) }.map { it.getName() }
+        return filter { it.name.startsWith(begin, true) && validator(it) }.map { it.name }
     }
 }
