@@ -1,3 +1,13 @@
 {
-  "phantom.keybinding.positioning": "GUI Positionierung"
+  "phantom.keybinding.positioning": "GUI Positionierung",
+  "phantom.generic.enabled": "Aktiviert",
+  "phantom.generic.disabled": "Deaktiviert",
+  "phantom.commands.exceptionOccurred": "Ein Fehler ist aufgetreten: \"%s\"",
+  "phantom.commands.invalidParameterValue": "Ungültiges Argument \"%s\" für das Argument \"%s\". %s",
+  "phantom.commands.unknownCommand": "Command \"%s\" existiert nicht.",
+  "phantom.commands.invalidUsage": "Ungültige Benutzung des Commands \"%s\".",
+  "phantom.commands.commandTakesNoParameters": "Der Befehl nimmt keine Argumente.",
+  "phantom.commands.parameterRequired": "Argument \"%s\" ist benötigt.",
+  "phantom.commands.unknownParameter": "Unbekanntes Argument \"%s\".",
+  "phantom.commands.commandNotExecutable": "Befehl \"%s\" ist nicht ausführbar."
 }
