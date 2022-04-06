@@ -6,6 +6,7 @@ import de.vincentschweiger.phantomclient.event.Listenable
 import com.mojang.brigadier.suggestion.Suggestions
 import com.mojang.brigadier.suggestion.SuggestionsBuilder
 import de.vincentschweiger.phantomclient.command.impl.HelloCommand
+import de.vincentschweiger.phantomclient.command.impl.PrefixCommand
 import de.vincentschweiger.phantomclient.config.ConfigSystem
 import de.vincentschweiger.phantomclient.config.Configurable
 import de.vincentschweiger.phantomclient.event.ChatSendEvent
@@ -33,9 +34,8 @@ object CommandExecutor : Listenable {
                 CommandManager.execute(it.message.substring(CommandManager.Options.prefix.length))
             } catch (e: CommandException) {
                 chat(e.text.styled { it.withColor(Formatting.RED) })
-                chat("§cUsage: ")
-
                 if (e.usageInfo != null) {
+                    chat("§cUsage: ")
                     var first = true
 
                     // Zip the usage info together, e.g.
@@ -98,7 +98,13 @@ object CommandManager : Iterable<Command> {
     }
 
     fun registerInbuilt() {
-        addCommand(HelloCommand.createCommand())
+        val builtIn = arrayOf(
+                HelloCommand,
+                PrefixCommand
+        )
+        builtIn.onEach {
+            commands.add(it.createCommand())
+        }
     }
 
     fun addCommand(command: Command) {

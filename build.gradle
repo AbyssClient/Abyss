@@ -30,19 +30,21 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
-    // Add repositories to retrieve artifacts from in here.
-    // You should only use this when depending on other mods because
-    // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-    // See https://docs.gradle.org/current/userguide/declaring_repositories.html
-    // for more information about repositories.
     maven {
-        url 'https://jitpack.io'
+        url = "https://jitpack.io"
     }
     maven {
         url = "https://minecraft.guntram.de/maven/"
     }
     maven {
         url 'https://legendary-cookie.github.io/mvn-artifacts/'
+    }
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+        content {
+            includeGroup "maven.modrinth"
+        }
     }
 }
 
@@ -65,7 +67,7 @@ dependencies {
     modIncludeImplementation(fabricApi.module("fabric-resource-loader-v0", project.fabric_version))
     modIncludeImplementation("net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}")
     // 3'rd party mods
-    modImplementation "com.github.astei:lazydfu:0.1.2"
+    modImplementation "maven.modrinth:lazydfu:0.1.2"
     // MixinExtras
     implementation("com.github.LlamaLad7:MixinExtras:0.0.6")
     include("com.github.LlamaLad7:MixinExtras:0.0.6")
