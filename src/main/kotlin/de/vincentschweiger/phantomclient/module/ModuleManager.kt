@@ -2,12 +2,12 @@ package de.vincentschweiger.phantomclient.module
 
 import de.vincentschweiger.phantomclient.config.ConfigSystem
 import de.vincentschweiger.phantomclient.event.Listenable
-import de.vincentschweiger.phantomclient.module.impl.FpsModule
+import de.vincentschweiger.phantomclient.module.impl.*
 
 private val modules = mutableListOf<Module>()
 
 object ModuleManager : Listenable, Iterable<Module> by modules {
-    
+
     init {
         ConfigSystem.root("modules", modules)
     }
@@ -17,7 +17,9 @@ object ModuleManager : Listenable, Iterable<Module> by modules {
      */
     fun registerInbuilt() {
         val builtin = arrayOf(
-                FpsModule
+                FpsModule,
+                ClockModule,
+                HelloModule
         )
         builtin.apply {
             sortBy { it.name }
