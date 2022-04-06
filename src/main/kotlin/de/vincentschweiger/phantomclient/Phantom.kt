@@ -5,21 +5,17 @@ import de.vincentschweiger.phantomclient.config.ConfigSystem
 import de.vincentschweiger.phantomclient.cosmetics.CosmeticManager
 import de.vincentschweiger.phantomclient.event.*
 import de.vincentschweiger.phantomclient.module.ModuleManager
-import de.vincentschweiger.phantomclient.module.PositioningScreen
+import de.vincentschweiger.phantomclient.ui.PositioningScreen
 import de.vincentschweiger.phantomclient.socket.ServerConnection
-import de.vincentschweiger.phantomclient.utils.client.outputString
+import de.vincentschweiger.phantomclient.ui.ConfigScreen
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.option.KeyBinding
-import net.minecraft.client.resource.language.I18n
 import net.minecraft.client.util.InputUtil
-import net.minecraft.text.TranslatableText
-import net.minecraft.util.Language
 import org.lwjgl.glfw.GLFW
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import java.io.File
 import kotlin.system.exitProcess
 
 object Phantom : Listenable {
@@ -30,12 +26,14 @@ object Phantom : Listenable {
     val serverConnection = ServerConnection
     val logger: Logger = LoggerFactory.getLogger(CLIENT_NAME)!!
     private val kb: KeyBinding = KeyBindingHelper.registerKeyBinding(KeyBinding("phantom.keybinding.positioning", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_RIGHT_SHIFT, "Phantom"))
+    private val kb2: KeyBinding = KeyBindingHelper.registerKeyBinding(KeyBinding("other config screen thing", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_B, "Phantom"))
 
     /**
      * Called every tick
      */
     val tickHandler = handler<GameTickEvent> {
         if (kb.wasPressed()) MinecraftClient.getInstance().setScreen(PositioningScreen())
+        if (kb2.wasPressed()) MinecraftClient.getInstance().setScreen(ConfigScreen())
     }
 
     /**

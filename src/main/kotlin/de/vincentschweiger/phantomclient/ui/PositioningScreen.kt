@@ -1,5 +1,7 @@
-package de.vincentschweiger.phantomclient.module
+package de.vincentschweiger.phantomclient.ui
 
+import de.vincentschweiger.phantomclient.module.ModuleManager
+import de.vincentschweiger.phantomclient.module.UIModule
 import de.vincentschweiger.phantomclient.utils.client.mc
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.util.math.MatrixStack

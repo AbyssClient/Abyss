@@ -6,5 +6,6 @@ import org.slf4j.Logger
 
 // Easy access
 val mc = MinecraftClient.getInstance()!!
+
 val logger: Logger
     get() = Phantom.logger
