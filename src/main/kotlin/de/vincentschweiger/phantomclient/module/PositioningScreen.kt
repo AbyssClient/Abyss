@@ -1,8 +1,10 @@
 package de.vincentschweiger.phantomclient.module
 
+import de.vincentschweiger.phantomclient.utils.client.mc
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.text.LiteralText
+import java.awt.Color
 
 class PositioningScreen : Screen(LiteralText.EMPTY) {
     private var draggedModule: UIModule? = null
@@ -13,6 +15,10 @@ class PositioningScreen : Screen(LiteralText.EMPTY) {
 
     override fun render(matrixStack: MatrixStack, mouseX: Int, mouseY: Int, pTicks: Float) {
         renderBackground(matrixStack)
+        for (i in 1..3) {
+            drawHorizontalLine(matrixStack, -10, mc.window.width, mc.window.scaledHeight / 4 * i, Color.GRAY.rgb)
+            drawVerticalLine(matrixStack, mc.window.scaledWidth / 4 * i, -10, mc.window.height, Color.GRAY.rgb)
+        }
         ModuleManager.getUIModules().forEach {
             it.render(it.enabled)
         }
