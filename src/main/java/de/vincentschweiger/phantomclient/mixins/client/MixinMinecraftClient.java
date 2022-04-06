@@ -1,4 +1,4 @@
-package de.vincentschweiger.phantomclient.mixins;
+package de.vincentschweiger.phantomclient.mixins.client;
 
 import de.vincentschweiger.phantomclient.event.*;
 import net.minecraft.client.MinecraftClient;

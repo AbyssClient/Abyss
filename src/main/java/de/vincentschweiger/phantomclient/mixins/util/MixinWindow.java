@@ -1,4 +1,4 @@
-package de.vincentschweiger.phantomclient.mixins;
+package de.vincentschweiger.phantomclient.mixins.util;
 
 import de.vincentschweiger.phantomclient.event.EventManager;
 import de.vincentschweiger.phantomclient.event.WindowFocusEvent;

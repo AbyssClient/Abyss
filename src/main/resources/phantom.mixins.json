@@ -6,18 +6,18 @@
   "mixins": [
   ],
   "client": [
-    "MixinInGameHud",
-    "MixinMinecraftClient",
-    "MinecraftClientAccessor",
-    "MixinPlayerEntityRenderer",
-    "InvokerEntityModelLayers",
-    "MixinGameRenderer",
-    "MixinWindow",
-    "MixinMouse",
-    "MixinKeyboard",
-    "GameOptionsAccessor",
-    "MixinScreen",
-    "MixinClientPlayerEntity"
+    "gui.MixinInGameHud",
+    "client.MixinMinecraftClient",
+    "client.MinecraftClientAccessor",
+    "render.MixinPlayerEntityRenderer",
+    "render.InvokerEntityModelLayers",
+    "render.MixinGameRenderer",
+    "util.MixinWindow",
+    "client.MixinMouse",
+    "client.MixinKeyboard",
+    "client.GameOptionsAccessor",
+    "gui.MixinScreen",
+    "client.MixinClientPlayerEntity"
   ],
   "injectors": {
     "defaultRequire": 1

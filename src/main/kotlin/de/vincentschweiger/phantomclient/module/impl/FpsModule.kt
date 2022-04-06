@@ -1,6 +1,6 @@
 package de.vincentschweiger.phantomclient.module.impl
 
-import de.vincentschweiger.phantomclient.mixins.MinecraftClientAccessor
+import de.vincentschweiger.phantomclient.mixins.client.MinecraftClientAccessor
 import de.vincentschweiger.phantomclient.module.UIModule
 
 object FpsModule : UIModule("Fps") {

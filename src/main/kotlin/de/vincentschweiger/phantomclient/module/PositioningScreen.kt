@@ -1,6 +1,5 @@
 package de.vincentschweiger.phantomclient.module
 
-import de.vincentschweiger.phantomclient.config.ConfigSystem
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.text.LiteralText
@@ -45,11 +44,6 @@ class PositioningScreen : Screen(LiteralText.EMPTY) {
     override fun mouseReleased(mouseX: Double, mouseY: Double, button: Int): Boolean {
         if (button == 0) draggedModule = null
         return super.mouseReleased(mouseX, mouseY, button)
-    }
-
-    override fun close() {
-        super.close()
-        ConfigSystem.store()
     }
 
     private fun checkOutOfBounds(m: UIModule) {

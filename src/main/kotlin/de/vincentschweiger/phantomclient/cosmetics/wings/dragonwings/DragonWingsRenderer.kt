@@ -1,7 +1,7 @@
 package de.vincentschweiger.phantomclient.cosmetics.wings.dragonwings
 
 import de.vincentschweiger.phantomclient.cosmetics.CosmeticUtils.checkClientUser
-import de.vincentschweiger.phantomclient.mixins.InvokerEntityModelLayers
+import de.vincentschweiger.phantomclient.mixins.render.InvokerEntityModelLayers
 import de.vincentschweiger.phantomclient.socket.ServerInfoProvider.hasCosmetic
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.network.ClientPlayerEntity

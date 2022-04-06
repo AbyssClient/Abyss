@@ -1,5 +1,7 @@
 package de.vincentschweiger.phantomclient.event
 
+import de.vincentschweiger.phantomclient.utils.client.logger
+
 typealias Handler<T> = (T) -> Unit
 
 class EventHook<T : Event>(val handlerClass: Listenable, val handler: Handler<T>, val ignoresCondition: Boolean, val priority: Int = 0)
@@ -19,8 +21,7 @@ interface Listenable {
 }
 
 inline fun <reified T : Event> Listenable.handler(ignoreCondition: Boolean = false, priority: Int = 0, noinline handler: Handler<T>) {
-    //println("Registering event hook")
-    //println(T::class.java)
+    logger.debug("Registering event hook: ", T::class.java)
     EventManager.registerEventHook(T::class.java, EventHook(this, handler, ignoreCondition, priority))
 }
 

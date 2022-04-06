@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "id": "phantom",
   "version": "${version}",
-  "name": "Phantom Client",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Phantom",
+  "description": "A modern PVP client for fabric",
   "authors": [
     "1vento"
   ],
@@ -11,9 +11,9 @@
     "homepage": "https://fabricmc.net/",
     "sources": "https://github.com/FabricMC/fabric-example-mod"
   },
-  "license": "CC0-1.0",
+  "license": "GPLv3",
   "icon": "assets/phantom/icon.png",
-  "environment": "*",
+  "environment": "client",
   "entrypoints": {
     "main": [],
     "preLaunch": [
@@ -27,6 +27,7 @@
     "fabricloader": ">=0.13.3",
     "fabric-key-binding-api-v1": "*",
     "fabric-rendering-v1": "*",
+    "fabric-resource-loader-v0": "*",
     "fabric-language-kotlin": "*",
     "minecraft": "1.18.x",
     "java": ">=17"

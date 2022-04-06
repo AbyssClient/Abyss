@@ -1,4 +1,4 @@
-package de.vincentschweiger.phantomclient.mixins;
+package de.vincentschweiger.phantomclient.mixins.render;
 
 import de.vincentschweiger.phantomclient.cosmetics.cape.CapeRenderer;
 import de.vincentschweiger.phantomclient.cosmetics.hat.HatRenderer;

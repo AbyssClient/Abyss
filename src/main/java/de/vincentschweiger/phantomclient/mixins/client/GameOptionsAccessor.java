@@ -1,4 +1,4 @@
-package de.vincentschweiger.phantomclient.mixins;
+package de.vincentschweiger.phantomclient.mixins.client;
 
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.option.KeyBinding;
