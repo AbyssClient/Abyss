@@ -15,6 +15,11 @@ object EventManager {
     val mappedEvents = arrayOf(
             GameTickEvent::class,
             ClientStartEvent::class,
+            OverlayRenderEvent::class,
+            InputHandleEvent::class,
+            KeyEvent::class,
+            ScreenEvent::class,
+            ToggleModuleEvent::class,
             ClientShutdownEvent::class
     ).map { Pair(it.findAnnotation<Nameable>()!!.name, it) }
 
