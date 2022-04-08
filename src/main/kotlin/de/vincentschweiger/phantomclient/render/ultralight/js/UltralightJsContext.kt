@@ -51,7 +51,7 @@ class UltralightJsContext(view: View, ulView: ThreadLock<UltralightView>) {
             0
         )
 
-        // todo: minecraft has to be remapped
+        // TODO: minecraft has to be remapped
         globalObject.setProperty(
             "minecraft",
             databind.conversionUtils.toJavascript(context, mc),

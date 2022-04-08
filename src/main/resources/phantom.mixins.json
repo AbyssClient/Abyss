@@ -12,7 +12,7 @@
     "render.MixinPlayerEntityRenderer",
     "render.InvokerEntityModelLayers",
     "render.MixinGameRenderer",
-    "util.MixinWindow",
+    "client.MixinWindow",
     "client.MixinMouse",
     "client.MixinKeyboard",
     "client.GameOptionsAccessor",

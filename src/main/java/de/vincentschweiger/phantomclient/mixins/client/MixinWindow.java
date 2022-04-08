@@ -1,4 +1,4 @@
-package de.vincentschweiger.phantomclient.mixins.util;
+package de.vincentschweiger.phantomclient.mixins.client;
 
 import de.vincentschweiger.phantomclient.event.EventManager;
 import de.vincentschweiger.phantomclient.event.WindowFocusEvent;
@@ -14,7 +14,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Window.class)
 public class MixinWindow {
 
-    @Shadow @Final private long handle;
+    @Shadow
+    @Final
+    private long handle;
 
     /**
      * Hook window resize
@@ -33,6 +35,4 @@ public class MixinWindow {
     public void hookFocus(long window, boolean focused, CallbackInfo callbackInfo) {
         EventManager.INSTANCE.callEvent(new WindowFocusEvent(window, focused));
     }
-
-
 }
