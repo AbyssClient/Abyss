@@ -2,6 +2,7 @@
 
 ## Credits
 Everything ultralight: CCBlueX/LiquidBounce
+<br>
 Config system (Will maybe rewrite someday): CCBlueX/LiquidBounce
 
 ## Setup
