@@ -12,7 +12,7 @@ import java.awt.Color
 
 abstract class UIModule(
         name: String,
-        state: Boolean = false
+        state: Boolean = false,
 ) : Module(name, state) {
     var x by double("x", 0.0)
     var y by double("y", 0.0)
@@ -53,7 +53,7 @@ abstract class UIModule(
         if (enabled) {
             mc.textRenderer.drawWithShadow(stack, getText(), getScaledX().toFloat(), getScaledY().toFloat(), color.rgb)
         } else {
-            //If you don't want to render the disabled modules in the drag-screen, just remove/comment following line
+            // If you don't want to render the disabled modules in the drag-screen, just remove/comment following line
             mc.textRenderer.drawWithShadow(stack, LiteralText(getText()).setStyle(Style.EMPTY.withStrikethrough(true)), getScaledX().toFloat(), getScaledY().toFloat(), color.rgb)
         }
         stack.pop()

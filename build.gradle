@@ -50,9 +50,13 @@ repositories {
 
 configurations {
     modIncludeImplementation
+    includeImplementation
 
     include.extendsFrom modIncludeImplementation
     modImplementation.extendsFrom modIncludeImplementation
+
+    include.extendsFrom includeImplementation
+    implementation.extendsFrom includeImplementation
 }
 
 dependencies {
@@ -69,21 +73,16 @@ dependencies {
     // 3'rd party mods
     modImplementation "maven.modrinth:lazydfu:0.1.2"
     // MixinExtras
-    implementation("com.github.LlamaLad7:MixinExtras:0.0.6")
-    include("com.github.LlamaLad7:MixinExtras:0.0.6")
+    includeImplementation("com.github.LlamaLad7:MixinExtras:0.0.6")
     annotationProcessor("com.github.LlamaLad7:MixinExtras:0.0.6")
     // Libraries
-    implementation "phantom:models:1.0.1"
-    include "phantom:models:1.0.1"
+    includeImplementation "phantom:models:1.0.1"
 
-    /*
-    implementation "com.labymedia:ultralight-java-base:${project.ultralight_version}"
-    implementation "com.labymedia:ultralight-java-databind:${project.ultralight_version}"
-    implementation "com.labymedia:ultralight-java-gpu:${project.ultralight_version}"
-    include "com.labymedia:ultralight-java-base:${project.ultralight_version}"
-    include "com.labymedia:ultralight-java-databind:${project.ultralight_version}"
-    include "com.labymedia:ultralight-java-gpu:${project.ultralight_version}"
-     */
+    implementation ":theme"
+
+    includeImplementation "com.labymedia:ultralight-java-base:${project.ultralight_version}"
+    includeImplementation "com.labymedia:ultralight-java-databind:${project.ultralight_version}"
+    includeImplementation "com.labymedia:ultralight-java-gpu:${project.ultralight_version}"
 }
 
 processResources {

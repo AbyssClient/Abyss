@@ -2,11 +2,10 @@ package de.vincentschweiger.phantomclient
 
 import de.vincentschweiger.phantomclient.command.CommandManager
 import de.vincentschweiger.phantomclient.config.ConfigSystem
-import de.vincentschweiger.phantomclient.cosmetics.CosmeticManager
 import de.vincentschweiger.phantomclient.event.*
 import de.vincentschweiger.phantomclient.module.ModuleManager
+import de.vincentschweiger.phantomclient.render.ultralight.UltralightEngine
 import de.vincentschweiger.phantomclient.ui.PositioningScreen
-import de.vincentschweiger.phantomclient.socket.ServerConnection
 import de.vincentschweiger.phantomclient.ui.ConfigScreen
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
 import net.fabricmc.loader.api.FabricLoader
@@ -22,8 +21,8 @@ object Phantom : Listenable {
     const val CLIENT_NAME = "Phantom"
     val CLIENT_VERSION: String = FabricLoader.getInstance().getModContainer("phantom").get().metadata.version.friendlyString
     const val CLIENT_AUTHOR = "Vento"
+    const val LIQUID_CLIENT_CLOUD = "https://cloud.liquidbounce.net/LiquidBounce"
 
-    val serverConnection = ServerConnection
     val logger: Logger = LoggerFactory.getLogger(CLIENT_NAME)!!
     private val kb: KeyBinding = KeyBindingHelper.registerKeyBinding(KeyBinding("phantom.keybinding.positioning", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_RIGHT_SHIFT, "Phantom"))
     private val kb2: KeyBinding = KeyBindingHelper.registerKeyBinding(KeyBinding("other config screen thing", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_B, "Phantom"))
@@ -42,13 +41,14 @@ object Phantom : Listenable {
     val startHandler = handler<ClientStartEvent> {
         runCatching {
             logger.info("Launching $CLIENT_NAME v$CLIENT_VERSION by $CLIENT_AUTHOR")
-            serverConnection.setup()
             // Stuff
             EventManager
             ConfigSystem
             ModuleManager
             CommandManager
-            CosmeticManager
+
+            UltralightEngine.init()
+
             // Register commands & modules
             ModuleManager.registerInbuilt()
             CommandManager.registerInbuilt()
@@ -68,6 +68,6 @@ object Phantom : Listenable {
     val shutdownHandler = handler<ClientShutdownEvent> {
         logger.info("Shutting down phantom ...")
         ConfigSystem.store()
-        serverConnection.close()
+        UltralightEngine.shutdown()
     }
 }

@@ -1,8 +1,5 @@
 package de.vincentschweiger.phantomclient.mixins.render;
 
-import de.vincentschweiger.phantomclient.cosmetics.cape.CapeRenderer;
-import de.vincentschweiger.phantomclient.cosmetics.hat.HatRenderer;
-import de.vincentschweiger.phantomclient.cosmetics.wings.dragonwings.DragonWingsRenderer;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
