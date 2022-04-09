@@ -21,7 +21,7 @@ jobs:
       - name: checkout repository
         uses: actions/checkout@v2
       - name: Checkout submodules
-        uses: textbook/git-checkout-submodule-action@2.1.1
+        uses: chris-short/github-action-git-submodules@v0.1.0
       - name: validate gradle wrapper
         uses: gradle/wrapper-validation-action@v1
       - name: setup jdk ${{ matrix.java }}
