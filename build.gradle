@@ -37,9 +37,6 @@ repositories {
         url = "https://minecraft.guntram.de/maven/"
     }
     maven {
-        url 'https://legendary-cookie.github.io/mvn-artifacts/'
-    }
-    maven {
         name = "Modrinth"
         url = "https://api.modrinth.com/maven"
         content {
@@ -76,8 +73,6 @@ dependencies {
     includeImplementation("com.github.LlamaLad7:MixinExtras:0.0.6")
     annotationProcessor("com.github.LlamaLad7:MixinExtras:0.0.6")
     // Libraries
-    includeImplementation "phantom:models:1.0.1"
-
     implementation ":theme"
 
     includeImplementation "com.labymedia:ultralight-java-base:${project.ultralight_version}"

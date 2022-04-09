@@ -1,27 +1,28 @@
 {
   "schemaVersion": 1,
-  "id": "phantom",
+  "id": "abyss",
   "version": "${version}",
-  "name": "Phantom",
+  "name": "Abyss Client",
   "description": "A modern PVP client for fabric",
   "authors": [
-    "1vento"
+    "cookie",
+    "link4real"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/AbyssClient/Abyss"
   },
   "license": "GPLv3",
-  "icon": "assets/phantom/icon.png",
+  "icon": "assets/abyss/icon.png",
   "environment": "client",
   "entrypoints": {
     "main": [],
     "preLaunch": [
-      "de.vincentschweiger.phantomclient.PreLaunch"
+      "me.cookie.abyssclient.PreLaunch"
     ]
   },
   "mixins": [
-    "phantom.mixins.json"
+    "abyss.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.13.3",

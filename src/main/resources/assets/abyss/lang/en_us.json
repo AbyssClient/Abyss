@@ -1,0 +1,14 @@
+{
+  "abyss.keybinding.positioning": "Positioning GUI",
+  "abyss.generic.enabled": "Enabled",
+  "abyss.generic.disabled": "Disabled",
+  "abyss.commands.exceptionOccurred": "Failed to execute command. %s",
+  "abyss.commands.invalidParameterValue": "Invalid argument \"%s\" for parameter \"%s\". %s",
+  "abyss.commands.unknownCommand": "Command \"%s\" was not found.",
+  "abyss.commands.invalidUsage": "Invalid usage of command \"%s\".",
+  "abyss.commands.commandTakesNoParameters": "Command does not take any arguments.",
+  "abyss.commands.parameterRequired": "Parameter \"%s\" is required.",
+  "abyss.commands.unknownParameter": "Unknown parameter \"%s\".",
+  "abyss.commands.commandNotExecutable": "Command \"%s\" is not executable.",
+  "abyss.commands.prefixSet": "Set the command prefix to \"%s\"."
+}
