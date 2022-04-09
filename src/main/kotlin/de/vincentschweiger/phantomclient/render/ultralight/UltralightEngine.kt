@@ -7,6 +7,7 @@ import com.labymedia.ultralight.config.FontHinting
 import com.labymedia.ultralight.config.UltralightConfig
 import com.labymedia.ultralight.gpu.UltralightGPUDriverNativeUtil
 import com.labymedia.ultralight.plugin.logging.UltralightLogLevel
+import de.vincentschweiger.phantomclient.render.ultralight.fs.BrowserFileSystem
 import de.vincentschweiger.phantomclient.render.ultralight.glfw.*
 import de.vincentschweiger.phantomclient.render.ultralight.hooks.UltralightIntegrationHook
 import de.vincentschweiger.phantomclient.render.ultralight.hooks.UltralightScreenHook
@@ -61,11 +62,13 @@ object UltralightEngine {
                 UltralightConfig()
                         .animationTimerDelay(1.0 / refreshRate)
                         .scrollTimerDelay(1.0 / refreshRate)
-                        .cachePath(res.cacheRoot.absolutePath)
                         .resourcePath(res.resourcesRoot.absolutePath)
+                        .cachePath(res.cacheRoot.absolutePath)
                         .fontHinting(FontHinting.SMOOTH)
         )
         platform.get().usePlatformFontLoader()
+        platform.get().setFileSystem(BrowserFileSystem())
+        platform.get().setClipboard(GlfwClipboardAdapter())
         platform.get().setLogger { level, message ->
             @Suppress("WHEN_ENUM_CAN_BE_NULL_IN_JAVA")
             when (level) {

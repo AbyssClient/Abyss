@@ -17,7 +17,6 @@ import de.vincentschweiger.phantomclient.utils.client.mc
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.util.math.MatrixStack
 
-
 open class View(val layer: RenderLayer, private val viewRenderer: ViewRenderer) {
 
     val ultralightView = ThreadLock<UltralightView>()
@@ -45,7 +44,7 @@ open class View(val layer: RenderLayer, private val viewRenderer: ViewRenderer) 
         // Setup JS bindings
         context = UltralightJsContext(this, ultralightView)
 
-        logger.debug("Successfully created new view")
+        logger.info("Successfully created new view")
     }
 
     /**
@@ -60,6 +59,7 @@ open class View(val layer: RenderLayer, private val viewRenderer: ViewRenderer) 
         }
 
         ultralightView.get().loadURL(page.viewableFile)
+
         viewingPage = page
         logger.debug("Successfully loaded page ${page.name} from ${page.viewableFile}")
     }
