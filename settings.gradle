@@ -8,5 +8,5 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
-rootProject.name = 'phantom'
+rootProject.name = 'abyss'
 includeBuild 'theme'

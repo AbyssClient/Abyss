@@ -17,8 +17,9 @@ plugins {
 }
 
 apply plugin: 'de.guntram.mcmod.crowdin-translate'
-crowdintranslate.crowdinProjectName = 'phantom'
-crowdintranslate.minecraftProjectName = 'phantom'
+
+crowdintranslate.crowdinProjectName = 'abyssclient'
+crowdintranslate.minecraftProjectName = 'abyssclient'
 crowdintranslate.verbose = false
 
 
