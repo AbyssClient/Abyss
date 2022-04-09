@@ -11,5 +11,4 @@ object UltralightJsUtils {
      * Open link
      */
     fun browse(url: String) = browseUrl(url)
-
 }
