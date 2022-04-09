@@ -29,7 +29,7 @@ class Theme(val name: String) {
 
         fun default() = Theme("default").apply {
             runCatching {
-                val stream = resource("/assets/phantom/default_theme.zip")
+                val stream = resource("/assets/abyss/default_theme.zip")
 
                 if (exists) {
                     themeFolder.deleteRecursively()
