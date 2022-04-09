@@ -60,22 +60,22 @@ class UltralightJsEvents(private val viewContextProvider: ContextProvider, val v
 
         // Create an event hook that will call the JS function
         val eventHook = EventHook<Event>(
-                this,
-                { event ->
-                    RenderSystem.recordRenderCall {
-                        runCatching {
-                            viewContextProvider.syncWithJavascript {
-                                it.context.globalObject.getProperty(propertyName).toObject().callAsFunction(
-                                        it.context.globalObject,
-                                        view.context.databind.conversionUtils.toJavascript(it.context, event)
-                                )
-                            }
-                        }.onFailure {
-                            logger.error("Ultralight JS Engine", it)
+            this,
+            { event ->
+                RenderSystem.recordRenderCall {
+                    runCatching {
+                        viewContextProvider.syncWithJavascript {
+                            it.context.globalObject.getProperty(propertyName).toObject().callAsFunction(
+                                it.context.globalObject,
+                                view.context.databind.conversionUtils.toJavascript(it.context, event)
+                            )
                         }
+                    }.onFailure {
+                        logger.error("Ultralight JS Engine", it)
                     }
-                },
-                false,
+                }
+            },
+            false,
         )
 
         // Add the event hook to the list

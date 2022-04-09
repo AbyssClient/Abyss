@@ -4,8 +4,8 @@ import me.cookie.abyssclient.command.AutoCompletionHandler
 import me.cookie.abyssclient.command.Parameter
 import me.cookie.abyssclient.command.ParameterValidationResult
 import me.cookie.abyssclient.command.ParameterVerifier
-import me.cookie.abyssclient.module.ModuleManager
 import me.cookie.abyssclient.module.Module
+import me.cookie.abyssclient.module.ModuleManager
 
 class ParameterBuilder<T> private constructor(val name: String) {
 
@@ -50,7 +50,7 @@ class ParameterBuilder<T> private constructor(val name: String) {
         fun <T> begin(name: String): ParameterBuilder<T> = ParameterBuilder(name)
 
         fun autocompleteWithList(supplier: () -> Iterable<String>): AutoCompletionHandler =
-                { start -> supplier().filter { it.startsWith(start, true) } }
+            { start -> supplier().filter { it.startsWith(start, true) } }
     }
 
     fun verifiedBy(verifier: ParameterVerifier<T>): ParameterBuilder<T> {
@@ -102,13 +102,13 @@ class ParameterBuilder<T> private constructor(val name: String) {
         }
 
         return Parameter(
-                this.name,
-                this.required
-                        ?: throw IllegalArgumentException("The parameter was neither marked as required nor as optional."),
-                this.vararg,
-                this.verifier,
-                autocompletionHandler,
-                useMinecraftAutoCompletion
+            this.name,
+            this.required
+                ?: throw IllegalArgumentException("The parameter was neither marked as required nor as optional."),
+            this.vararg,
+            this.verifier,
+            autocompletionHandler,
+            useMinecraftAutoCompletion
         )
     }
 

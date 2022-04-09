@@ -2,7 +2,9 @@ package me.cookie.abyssclient.module
 
 import me.cookie.abyssclient.config.ConfigSystem
 import me.cookie.abyssclient.event.Listenable
-import me.cookie.abyssclient.module.impl.*
+import me.cookie.abyssclient.module.impl.ClockModule
+import me.cookie.abyssclient.module.impl.FpsModule
+import me.cookie.abyssclient.module.impl.HelloModule
 
 private val modules = mutableListOf<Module>()
 
@@ -17,9 +19,9 @@ object ModuleManager : Listenable, Iterable<Module> by modules {
      */
     fun registerInbuilt() {
         val builtin = arrayOf(
-                FpsModule,
-                ClockModule,
-                HelloModule
+            FpsModule,
+            ClockModule,
+            HelloModule
         )
         builtin.apply {
             sortBy { it.name }

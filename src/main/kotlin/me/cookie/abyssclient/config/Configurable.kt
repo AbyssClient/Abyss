@@ -1,11 +1,15 @@
 package me.cookie.abyssclient.config
 
+import me.cookie.abyssclient.module.Module
 import net.minecraft.block.Block
 import net.minecraft.item.Item
-import me.cookie.abyssclient.module.Module
 
-open class Configurable(name: String, value: MutableList<Value<*>> = mutableListOf(), valueType: ValueType = ValueType.CONFIGURABLE) :
-        Value<MutableList<Value<*>>>(name, value = value, valueType) {
+open class Configurable(
+    name: String,
+    value: MutableList<Value<*>> = mutableListOf(),
+    valueType: ValueType = ValueType.CONFIGURABLE
+) :
+    Value<MutableList<Value<*>>>(name, value = value, valueType) {
 
     open fun initConfigurable() {
         value.filterIsInstance<Configurable>().forEach {
@@ -56,10 +60,10 @@ open class Configurable(name: String, value: MutableList<Value<*>> = mutableList
     }
 
     protected fun <T : Any> value(name: String, default: T, valueType: ValueType = ValueType.INVALID) =
-            Value(name, default, valueType).apply { this@Configurable.value.add(this) }
+        Value(name, default, valueType).apply { this@Configurable.value.add(this) }
 
     protected fun <T : Any> rangedValue(name: String, default: T, range: ClosedRange<*>, valueType: ValueType) =
-            RangedValue(name, default, range, valueType).apply { this@Configurable.value.add(this) }
+        RangedValue(name, default, range, valueType).apply { this@Configurable.value.add(this) }
 
     // Fixed data types
 
@@ -68,17 +72,18 @@ open class Configurable(name: String, value: MutableList<Value<*>> = mutableList
     protected fun double(name: String, default: Double) = value(name, default, ValueType.DOUBLE)
 
     protected fun float(name: String, default: Float, range: ClosedFloatingPointRange<Float>) =
-            rangedValue(name, default, range, ValueType.FLOAT)
+        rangedValue(name, default, range, ValueType.FLOAT)
 
     protected fun floatRange(
-            name: String,
-            default: ClosedFloatingPointRange<Float>,
-            range: ClosedFloatingPointRange<Float>
+        name: String,
+        default: ClosedFloatingPointRange<Float>,
+        range: ClosedFloatingPointRange<Float>
     ) = rangedValue(name, default, range, ValueType.FLOAT_RANGE)
 
     protected fun int(name: String, default: Int, range: IntRange) = rangedValue(name, default, range, ValueType.INT)
 
-    protected fun intRange(name: String, default: IntRange, range: IntRange) = rangedValue(name, default, range, ValueType.INT_RANGE)
+    protected fun intRange(name: String, default: IntRange, range: IntRange) =
+        rangedValue(name, default, range, ValueType.INT_RANGE)
 
     protected fun text(name: String, default: String) = value(name, default, ValueType.TEXT)
 
@@ -89,12 +94,12 @@ open class Configurable(name: String, value: MutableList<Value<*>> = mutableList
     protected fun item(name: String, default: Item) = value(name, default, ValueType.ITEM)
 
     protected fun <T : NamedChoice> enumChoice(name: String, default: T, choices: Array<T>) =
-            ChooseListValue(name, default, choices).apply { this@Configurable.value.add(this) }
+        ChooseListValue(name, default, choices).apply { this@Configurable.value.add(this) }
 
     protected fun Module.choices(name: String, active: Choice, choices: Array<Choice>) =
-            ChoiceConfigurable(this, name, active) { choices }.apply { this@Configurable.value.add(this) }
+        ChoiceConfigurable(this, name, active) { choices }.apply { this@Configurable.value.add(this) }
 
     protected fun Module.choices(name: String, active: Choice, choicesCallback: (ChoiceConfigurable) -> Array<Choice>) =
-            ChoiceConfigurable(this, name, active, choicesCallback).apply { this@Configurable.value.add(this) }
+        ChoiceConfigurable(this, name, active, choicesCallback).apply { this@Configurable.value.add(this) }
 
 }

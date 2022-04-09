@@ -11,8 +11,8 @@ import java.awt.Color
 
 
 abstract class UIModule(
-        name: String,
-        state: Boolean = false,
+    name: String,
+    state: Boolean = false,
 ) : Module(name, state) {
     var x by double("x", 0.0)
     var y by double("y", 0.0)
@@ -21,14 +21,13 @@ abstract class UIModule(
 
     val renderHandler = handler<OverlayRenderEvent> {
         if (
-                (
-                        mc.currentScreen == null
-                                || mc.currentScreen is ChatScreen
-                                || mc.currentScreen is InventoryScreen
-                        )
-                && !mc.options.debugEnabled
+            (
+                    mc.currentScreen == null
+                            || mc.currentScreen is ChatScreen
+                            || mc.currentScreen is InventoryScreen
+                    )
+            && !mc.options.debugEnabled
         ) {
-
             if (enabled) render(enabled)
         }
     }
@@ -54,7 +53,13 @@ abstract class UIModule(
             mc.textRenderer.drawWithShadow(stack, getText(), getScaledX().toFloat(), getScaledY().toFloat(), color.rgb)
         } else {
             // If you don't want to render the disabled modules in the drag-screen, just remove/comment following line
-            mc.textRenderer.drawWithShadow(stack, LiteralText(getText()).setStyle(Style.EMPTY.withStrikethrough(true)), getScaledX().toFloat(), getScaledY().toFloat(), color.rgb)
+            mc.textRenderer.drawWithShadow(
+                stack,
+                LiteralText(getText()).setStyle(Style.EMPTY.withStrikethrough(true)),
+                getScaledX().toFloat(),
+                getScaledY().toFloat(),
+                color.rgb
+            )
         }
         stack.pop()
     }

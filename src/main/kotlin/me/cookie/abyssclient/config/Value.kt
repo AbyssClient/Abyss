@@ -20,9 +20,9 @@ typealias ValueListener<T> = (T) -> T
  * Value based on generics and support for readable names and description
  */
 open class Value<T : Any>(
-        @SerializedName("name") open val name: String,
-        @SerializedName("value") internal var value: T,
-        @Exclude val valueType: ValueType,
+    @SerializedName("name") open val name: String,
+    @SerializedName("value") internal var value: T,
+    @Exclude val valueType: ValueType,
 ) {
 
     @Exclude
@@ -76,7 +76,7 @@ open class Value<T : Any>(
     open fun deserializeFrom(gson: Gson, element: JsonElement) {
         val currValue = this.value
         set(
-                gson.fromJson(element, currValue.javaClass)
+            gson.fromJson(element, currValue.javaClass)
         )
     }
 
@@ -103,10 +103,10 @@ open class Value<T : Any>(
  * Ranged value adds support for closed ranges
  */
 class RangedValue<T : Any>(
-        name: String,
-        value: T,
-        @Exclude val range: ClosedRange<*>,
-        type: ValueType
+    name: String,
+    value: T,
+    @Exclude val range: ClosedRange<*>,
+    type: ValueType
 ) : Value<T>(name, value, valueType = type) {
 
     fun getFrom(): Double {
@@ -150,9 +150,9 @@ class RangedValue<T : Any>(
 }
 
 class ChooseListValue<T : NamedChoice>(
-        name: String,
-        value: T,
-        @Exclude val choices: Array<T>
+    name: String,
+    value: T,
+    @Exclude val choices: Array<T>
 ) : Value<T>(name, value, ValueType.CHOOSE) {
 
     override fun deserializeFrom(gson: Gson, element: JsonElement) {

@@ -1,7 +1,6 @@
 package me.cookie.abyssclient.mixins.client;
 
 import me.cookie.abyssclient.event.*;
-import me.cookie.abyssclient.event.*;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import org.spongepowered.asm.mixin.Mixin;

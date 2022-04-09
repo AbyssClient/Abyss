@@ -7,13 +7,13 @@ import java.util.*
 typealias CommandHandler = (Command, Array<Any>) -> Unit
 
 class Command(
-        val name: String,
-        val aliases: Array<out String>,
-        val parameters: Array<Parameter<*>>,
-        val subcommands: Array<Command>,
-        val executable: Boolean,
-        val handler: CommandHandler?,
-        var parentCommand: Command? = null
+    val name: String,
+    val aliases: Array<out String>,
+    val parameters: Array<Parameter<*>>,
+    val subcommands: Array<Command>,
+    val executable: Boolean,
+    val handler: CommandHandler?,
+    var parentCommand: Command? = null
 ) {
     val translationBaseKey: String
         get() = "liquidbounce.command.${getParentKeys(this, name)}"
@@ -41,7 +41,10 @@ class Command(
 
     private fun getParentKeys(currentCommand: Command?, current: String): String {
         val parentName = currentCommand?.parentCommand?.name
-        return if (parentName != null) getParentKeys(currentCommand.parentCommand, "$parentName.subcommand.$current") else current
+        return if (parentName != null) getParentKeys(
+            currentCommand.parentCommand,
+            "$parentName.subcommand.$current"
+        ) else current
     }
 
     fun result(key: String, vararg args: Any): TranslatableText {
@@ -102,10 +105,10 @@ class Command(
     }
 
     fun autoComplete(
-            builder: SuggestionsBuilder,
-            tokenizationResult: Pair<List<String>, List<Int>>,
-            commandIdx: Int,
-            isNewParameter: Boolean
+        builder: SuggestionsBuilder,
+        tokenizationResult: Pair<List<String>, List<Int>>,
+        commandIdx: Int,
+        isNewParameter: Boolean
     ) {
         val args = tokenizationResult.first
 

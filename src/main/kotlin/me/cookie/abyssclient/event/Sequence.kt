@@ -1,10 +1,10 @@
 package me.cookie.abyssclient.event
 
 import com.google.common.collect.Lists
-import me.cookie.abyssclient.utils.client.logger
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import me.cookie.abyssclient.utils.client.logger
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine

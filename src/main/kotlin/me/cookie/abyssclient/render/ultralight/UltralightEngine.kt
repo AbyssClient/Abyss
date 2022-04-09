@@ -8,7 +8,9 @@ import com.labymedia.ultralight.config.UltralightConfig
 import com.labymedia.ultralight.gpu.UltralightGPUDriverNativeUtil
 import com.labymedia.ultralight.plugin.logging.UltralightLogLevel
 import me.cookie.abyssclient.render.ultralight.fs.BrowserFileSystem
-import me.cookie.abyssclient.render.ultralight.glfw.*
+import me.cookie.abyssclient.render.ultralight.glfw.GlfwClipboardAdapter
+import me.cookie.abyssclient.render.ultralight.glfw.GlfwCursorAdapter
+import me.cookie.abyssclient.render.ultralight.glfw.GlfwInputAdapter
 import me.cookie.abyssclient.render.ultralight.hooks.UltralightIntegrationHook
 import me.cookie.abyssclient.render.ultralight.hooks.UltralightScreenHook
 import me.cookie.abyssclient.render.ultralight.renderer.CpuViewRenderer
@@ -17,7 +19,6 @@ import me.cookie.abyssclient.utils.client.logger
 import me.cookie.abyssclient.utils.client.mc
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.util.math.MatrixStack
-import java.io.File
 
 object UltralightEngine {
     var window = mc.window.handle
@@ -59,12 +60,12 @@ object UltralightEngine {
         logger.debug("Setting up ultralight platform")
         platform.lock(UltralightPlatform.instance())
         platform.get().setConfig(
-                UltralightConfig()
-                        .animationTimerDelay(1.0 / refreshRate)
-                        .scrollTimerDelay(1.0 / refreshRate)
-                        .resourcePath(res.resourcesRoot.absolutePath)
-                        .cachePath(res.cacheRoot.absolutePath)
-                        .fontHinting(FontHinting.SMOOTH)
+            UltralightConfig()
+                .animationTimerDelay(1.0 / refreshRate)
+                .scrollTimerDelay(1.0 / refreshRate)
+                .resourcePath(res.resourcesRoot.absolutePath)
+                .cachePath(res.cacheRoot.absolutePath)
+                .fontHinting(FontHinting.SMOOTH)
         )
         platform.get().usePlatformFontLoader()
         platform.get().setFileSystem(BrowserFileSystem())
@@ -107,9 +108,9 @@ object UltralightEngine {
         renderer.get().render()
 
         views.filter { it.layer == layer }
-                .forEach {
-                    it.render(matrices)
-                }
+            .forEach {
+                it.render(matrices)
+            }
     }
 
     fun resize(width: Long, height: Long) {
@@ -117,13 +118,13 @@ object UltralightEngine {
     }
 
     fun newSplashView() =
-            View(RenderLayer.SPLASH_LAYER, newViewRenderer()).also { views += it }
+        View(RenderLayer.SPLASH_LAYER, newViewRenderer()).also { views += it }
 
     fun newOverlayView() =
-            View(RenderLayer.OVERLAY_LAYER, newViewRenderer()).also { views += it }
+        View(RenderLayer.OVERLAY_LAYER, newViewRenderer()).also { views += it }
 
     fun newScreenView(screen: Screen, adaptedScreen: Screen? = null, parentScreen: Screen? = null) =
-            ScreenView(newViewRenderer(), screen, adaptedScreen, parentScreen).also { views += it }
+        ScreenView(newViewRenderer(), screen, adaptedScreen, parentScreen).also { views += it }
 
     fun removeView(view: View) {
         view.free()

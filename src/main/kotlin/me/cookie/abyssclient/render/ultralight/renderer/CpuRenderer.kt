@@ -61,15 +61,15 @@ class CpuViewRenderer : ViewRenderer {
             if (dirtyBounds.width() == width && dirtyBounds.height() == height) {
                 // Update full image
                 glTexImage2D(
-                        GL_TEXTURE_2D,
-                        0,
-                        GL_RGBA8,
-                        width,
-                        height,
-                        0,
-                        GL_BGRA,
-                        GL_UNSIGNED_INT_8_8_8_8_REV,
-                        imageData
+                    GL_TEXTURE_2D,
+                    0,
+                    GL_RGBA8,
+                    width,
+                    height,
+                    0,
+                    GL_BGRA,
+                    GL_UNSIGNED_INT_8_8_8_8_REV,
+                    imageData
                 )
             } else {
                 // Update partial image
@@ -80,11 +80,11 @@ class CpuViewRenderer : ViewRenderer {
                 val startOffset = (y * bitmap.rowBytes() + x * 4).toInt()
 
                 glTexSubImage2D(
-                        GL_TEXTURE_2D,
-                        0,
-                        x, y, dirtyWidth, dirtyHeight,
-                        GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV,
-                        imageData.position(startOffset) as ByteBuffer
+                    GL_TEXTURE_2D,
+                    0,
+                    x, y, dirtyWidth, dirtyHeight,
+                    GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV,
+                    imageData.position(startOffset) as ByteBuffer
                 )
             }
             glPixelStorei(GL_UNPACK_ROW_LENGTH, 0)
@@ -104,26 +104,26 @@ class CpuViewRenderer : ViewRenderer {
         bufferBuilder.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE_COLOR)
 
         bufferBuilder
-                .vertex(0.0, height.toDouble(), 0.0)
-                .texture(0f, scaleFactor)
-                .color(255, 255, 255, 255)
-                .next()
+            .vertex(0.0, height.toDouble(), 0.0)
+            .texture(0f, scaleFactor)
+            .color(255, 255, 255, 255)
+            .next()
         bufferBuilder
-                .vertex(width.toDouble(), height.toDouble(), 0.0)
-                .texture(scaleFactor, scaleFactor)
-                .color(255, 255, 255, 255)
-                .next()
+            .vertex(width.toDouble(), height.toDouble(), 0.0)
+            .texture(scaleFactor, scaleFactor)
+            .color(255, 255, 255, 255)
+            .next()
         bufferBuilder
-                .vertex(width.toDouble(), 0.0, 0.0)
-                .texture(scaleFactor, 0.0f)
-                .color(255, 255, 255, 255)
-                .next()
+            .vertex(width.toDouble(), 0.0, 0.0)
+            .texture(scaleFactor, 0.0f)
+            .color(255, 255, 255, 255)
+            .next()
 
         bufferBuilder
-                .vertex(0.0, 0.0, 0.0)
-                .texture(0.0f, 0.0f)
-                .color(255, 255, 255, 255)
-                .next()
+            .vertex(0.0, 0.0, 0.0)
+            .texture(0.0f, 0.0f)
+            .color(255, 255, 255, 255)
+            .next()
 
         tessellator.draw()
         RenderSystem.disableBlend()

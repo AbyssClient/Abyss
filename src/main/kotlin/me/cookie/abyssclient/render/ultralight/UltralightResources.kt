@@ -1,11 +1,12 @@
 package me.cookie.abyssclient.render.ultralight
 
-import me.cookie.abyssclient.Phantom
 import me.cookie.abyssclient.config.ConfigSystem
 import me.cookie.abyssclient.utils.client.logger
 import me.cookie.abyssclient.utils.io.HttpClient
 import me.cookie.abyssclient.utils.io.extractZip
-import me.cookie.abyssclient.utils.system.*
+import me.cookie.abyssclient.utils.system.IS_LINUX
+import me.cookie.abyssclient.utils.system.IS_MAC
+import me.cookie.abyssclient.utils.system.IS_WINDOWS
 import java.io.File
 import kotlin.system.exitProcess
 
@@ -56,7 +57,8 @@ class UltralightResources {
             }
 
             logger.info("Downloading v$LIBRARY_VERSION resources... (os: $os)")
-            val nativeUrl = "${me.cookie.abyssclient.Phantom.LIQUID_CLIENT_CLOUD}/ultralight_resources/$LIBRARY_VERSION/$os-x64.zip"
+            val nativeUrl =
+                "${me.cookie.abyssclient.Abyss.LIQUID_CLIENT_CLOUD}/ultralight_resources/$LIBRARY_VERSION/$os-x64.zip"
 
             // Download resources
             ultralightRoot.mkdir()

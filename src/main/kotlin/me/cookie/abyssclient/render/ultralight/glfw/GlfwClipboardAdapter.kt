@@ -1,4 +1,5 @@
 package me.cookie.abyssclient.render.ultralight.glfw
+
 import com.labymedia.ultralight.plugin.clipboard.UltralightClipboard
 import org.lwjgl.glfw.GLFW
 

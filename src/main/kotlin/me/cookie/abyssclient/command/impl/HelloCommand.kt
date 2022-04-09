@@ -8,9 +8,9 @@ import me.cookie.abyssclient.utils.client.chat
 object HelloCommand : CommandCreator {
     override fun createCommand(): Command {
         return CommandBuilder
-                .begin("hello")
-                .handler { command, args -> chat("Hello World!") }
-                .build()
+            .begin("hello")
+            .handler { command, args -> chat("Hello World!") }
+            .build()
     }
 
 }

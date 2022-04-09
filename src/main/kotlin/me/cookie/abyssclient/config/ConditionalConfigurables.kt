@@ -2,19 +2,19 @@ package me.cookie.abyssclient.config
 
 import me.cookie.abyssclient.config.util.Exclude
 import me.cookie.abyssclient.event.Listenable
+import me.cookie.abyssclient.module.Module
 import me.cookie.abyssclient.utils.client.toLowerCamelCase
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.network.ClientPlayNetworkHandler
 import net.minecraft.client.network.ClientPlayerEntity
 import net.minecraft.client.world.ClientWorld
 import net.minecraft.text.TranslatableText
-import me.cookie.abyssclient.module.Module
 
 /**
  * Should handle events when enabled. Allows the client-user to toggle features. (like modules)
  */
 open class ToggleableConfigurable(@Exclude val module: Module? = null, name: String, enabled: Boolean) : Listenable,
-        Configurable(name, valueType = ValueType.TOGGLEABLE) {
+    Configurable(name, valueType = ValueType.TOGGLEABLE) {
 
     val translationBaseKey: String
         get() = "${module?.translationBaseKey}.value.${name.toLowerCamelCase()}"
@@ -37,10 +37,10 @@ open class ToggleableConfigurable(@Exclude val module: Module? = null, name: Str
  * Allows to configure and manage modes
  */
 open class ChoiceConfigurable(
-        @Exclude val module: Module,
-        name: String,
-        var activeChoice: Choice,
-        choicesCallback: (ChoiceConfigurable) -> Array<Choice>
+    @Exclude val module: Module,
+    name: String,
+    var activeChoice: Choice,
+    choicesCallback: (ChoiceConfigurable) -> Array<Choice>
 ) : Configurable(name, valueType = ValueType.CHOICE) {
 
     val choices: Array<Choice>

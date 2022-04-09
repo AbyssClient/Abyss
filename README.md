@@ -1,4 +1,4 @@
-# Phantom
+# Abyss
 
 ## Credits
 Everything ultralight: CCBlueX/LiquidBounce

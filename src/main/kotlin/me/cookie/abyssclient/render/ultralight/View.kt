@@ -31,8 +31,8 @@ open class View(val layer: RenderLayer, private val viewRenderer: ViewRenderer) 
         // Setup view
         val (width, height) = mc.window.longedSize
         val viewConfig = UltralightViewConfig()
-                .isTransparent(true)
-                .initialDeviceScale(1.0)
+            .isTransparent(true)
+            .initialDeviceScale(1.0)
 
         // Make sure renderer setups config correctly
         viewRenderer.setupConfig(viewConfig)
@@ -153,5 +153,10 @@ open class View(val layer: RenderLayer, private val viewRenderer: ViewRenderer) 
 
 }
 
-class ScreenView(viewRenderer: ViewRenderer, val screen: Screen, val adaptedScreen: Screen?, val parentScreen: Screen?) :
-        View(RenderLayer.SCREEN_LAYER, viewRenderer)
+class ScreenView(
+    viewRenderer: ViewRenderer,
+    val screen: Screen,
+    val adaptedScreen: Screen?,
+    val parentScreen: Screen?
+) :
+    View(RenderLayer.SCREEN_LAYER, viewRenderer)

@@ -1,7 +1,5 @@
 package me.cookie.abyssclient.command
 
-import me.cookie.abyssclient.event.Listenable
-
 
 import com.mojang.brigadier.suggestion.Suggestions
 import com.mojang.brigadier.suggestion.SuggestionsBuilder
@@ -10,6 +8,7 @@ import me.cookie.abyssclient.command.impl.PrefixCommand
 import me.cookie.abyssclient.config.ConfigSystem
 import me.cookie.abyssclient.config.Configurable
 import me.cookie.abyssclient.event.ChatSendEvent
+import me.cookie.abyssclient.event.Listenable
 import me.cookie.abyssclient.event.handler
 import me.cookie.abyssclient.utils.client.chat
 import me.cookie.abyssclient.utils.client.outputString
@@ -18,7 +17,7 @@ import net.minecraft.util.Formatting
 import java.util.concurrent.CompletableFuture
 
 class CommandException(val text: TranslatableText, cause: Throwable? = null, val usageInfo: List<String>? = null) :
-        Exception(text.outputString(), cause)
+    Exception(text.outputString(), cause)
 
 /**
  * Links minecraft with the command engine
@@ -51,11 +50,11 @@ object CommandExecutor : Listenable {
                 }
             } catch (e: Exception) {
                 chat(
-                        TranslatableText("phantom.commands.exceptionOccurred", e).styled { style ->
-                            style.withColor(
-                                    Formatting.RED
-                            )
-                        }
+                    TranslatableText("phantom.commands.exceptionOccurred", e).styled { style ->
+                        style.withColor(
+                            Formatting.RED
+                        )
+                    }
                 )
             }
 
@@ -99,8 +98,8 @@ object CommandManager : Iterable<Command> {
 
     fun registerInbuilt() {
         val builtIn = arrayOf(
-                HelloCommand,
-                PrefixCommand
+            HelloCommand,
+            PrefixCommand
         )
         builtIn.onEach {
             commands.add(it.createCommand())
@@ -132,9 +131,9 @@ object CommandManager : Iterable<Command> {
      * @return A [Pair] of the subcommand and the index of [args] it is in, if none was found, null
      */
     private fun getSubCommand(
-            args: List<String>,
-            currentCommand: Pair<Command, Int>? = null,
-            idx: Int = 0
+        args: List<String>,
+        currentCommand: Pair<Command, Int>? = null,
+        idx: Int = 0
     ): Pair<Command, Int>? {
         // Return the last command when there are no more arguments
         if (idx >= args.size) {
@@ -146,15 +145,15 @@ object CommandManager : Iterable<Command> {
 
         // Look if something matches the current index, if it does, look if there are further matches
         commandSupplier
-                .firstOrNull {
-                    it.name.equals(args[idx], true) || it.aliases.any { alias ->
-                        alias.equals(
-                                args[idx],
-                                true
-                        )
-                    }
+            .firstOrNull {
+                it.name.equals(args[idx], true) || it.aliases.any { alias ->
+                    alias.equals(
+                        args[idx],
+                        true
+                    )
                 }
-                ?.let { return getSubCommand(args, Pair(it, idx), idx + 1) }
+            }
+            ?.let { return getSubCommand(args, Pair(it, idx), idx + 1) }
 
         // If no match was found, currentCommand is the subcommand that we searched for
         return currentCommand
@@ -177,18 +176,18 @@ object CommandManager : Iterable<Command> {
         // since the first index must contain a valid command, it is reported as
         // unknown
         val pair = getSubCommand(args) ?: throw CommandException(
-                TranslatableText(
-                        "phantom.commands.unknownCommand",
-                        args[0]
-                )
+            TranslatableText(
+                "phantom.commands.unknownCommand",
+                args[0]
+            )
         )
         val command = pair.first
 
         // If the command is not executable, don't allow it to be executed
         if (!command.executable) {
             throw CommandException(
-                    TranslatableText("phantom.commands.invalidUsage", args[0]),
-                    usageInfo = command.usage()
+                TranslatableText("phantom.commands.invalidUsage", args[0]),
+                usageInfo = command.usage()
             )
         }
 
@@ -198,19 +197,19 @@ object CommandManager : Iterable<Command> {
         // If there are more arguments for a command that takes no parameters
         if (command.parameters.isEmpty() && idx != args.size - 1) {
             throw CommandException(
-                    TranslatableText("phantom.commands.commandTakesNoParameters"),
-                    usageInfo = command.usage()
+                TranslatableText("phantom.commands.commandTakesNoParameters"),
+                usageInfo = command.usage()
             )
         }
 
         // If there is a required parameter after the supply of arguments ends, it is absent
         if (args.size - idx - 1 < command.parameters.size && command.parameters[args.size - idx - 1].required) {
             throw CommandException(
-                    TranslatableText(
-                            "phantom.commands.parameterRequired",
-                            command.parameters[args.size - idx - 1].name
-                    ),
-                    usageInfo = command.usage()
+                TranslatableText(
+                    "phantom.commands.parameterRequired",
+                    command.parameters[args.size - idx - 1].name
+                ),
+                usageInfo = command.usage()
             )
         }
 
@@ -230,8 +229,8 @@ object CommandManager : Iterable<Command> {
             // Check if there is a parameter for this index
             if (paramIndex >= command.parameters.size) {
                 throw CommandException(
-                        TranslatableText("phantom.commands.unknownParameter", args[i]),
-                        usageInfo = command.usage()
+                    TranslatableText("phantom.commands.unknownParameter", args[i]),
+                    usageInfo = command.usage()
                 )
             }
 
@@ -262,8 +261,8 @@ object CommandManager : Iterable<Command> {
 
         if (!command.executable) {
             throw CommandException(
-                    TranslatableText("phantom.commands.commandNotExecutable", command.name),
-                    usageInfo = command.usage()
+                TranslatableText("phantom.commands.commandNotExecutable", command.name),
+                usageInfo = command.usage()
             )
         }
 
@@ -282,13 +281,13 @@ object CommandManager : Iterable<Command> {
 
             if (validationResult.errorMessage != null) {
                 throw CommandException(
-                        TranslatableText(
-                                "phantom.commands.invalidParameterValue",
-                                parameter.name,
-                                argument,
-                                validationResult.errorMessage
-                        ),
-                        usageInfo = command.usage()
+                    TranslatableText(
+                        "phantom.commands.invalidParameterValue",
+                        parameter.name,
+                        argument,
+                        validationResult.errorMessage
+                    ),
+                    usageInfo = command.usage()
                 )
             }
 

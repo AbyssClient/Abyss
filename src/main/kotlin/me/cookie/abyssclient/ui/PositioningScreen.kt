@@ -52,9 +52,10 @@ class PositioningScreen : Screen(LiteralText.EMPTY) {
     override fun mouseDragged(mouseX: Double, mouseY: Double, button: Int, distX: Double, distY: Double): Boolean {
         if (draggedModule != null) {
             if (draggedModule!!.getScaledX() + draggedModule!!.width + distX < width
-                    && draggedModule!!.getScaledY() + draggedModule!!.height + distY < height
-                    && draggedModule!!.getScaledX() + distX >= 0
-                    && draggedModule!!.getScaledY() + distY > 0) {
+                && draggedModule!!.getScaledY() + draggedModule!!.height + distY < height
+                && draggedModule!!.getScaledX() + distX >= 0
+                && draggedModule!!.getScaledY() + distY > 0
+            ) {
                 val nearestModule = getNearestModule()
                 var newX = draggedModule!!.getScaledX() + distX
                 var newY = draggedModule!!.getScaledY() + distY
@@ -72,7 +73,8 @@ class PositioningScreen : Screen(LiteralText.EMPTY) {
         // Right click to toggle
         if (button == 0) {
             ModuleManager.getUIModules().forEach { m: UIModule ->
-                if (mouseX >= m.getScaledX() && mouseY >= m.getScaledY() && mouseX <= m.getScaledX() + m.width && mouseY <= m.getScaledY() + m.height) draggedModule = m
+                if (mouseX >= m.getScaledX() && mouseY >= m.getScaledY() && mouseX <= m.getScaledX() + m.width && mouseY <= m.getScaledY() + m.height) draggedModule =
+                    m
             }
         } else if (button == 1) {
             ModuleManager.getUIModules().forEach { m: UIModule ->
@@ -91,6 +93,9 @@ class PositioningScreen : Screen(LiteralText.EMPTY) {
     }
 
     private fun checkOutOfBounds(m: UIModule) {
-        if (m.getScaledX() > width - m.width + 2 || m.getScaledY() > height - m.height + 2 || m.getScaledX() < 0 || m.getScaledY() < 0) m.setPosition(0.0, 0.0)
+        if (m.getScaledX() > width - m.width + 2 || m.getScaledY() > height - m.height + 2 || m.getScaledX() < 0 || m.getScaledY() < 0) m.setPosition(
+            0.0,
+            0.0
+        )
     }
 }

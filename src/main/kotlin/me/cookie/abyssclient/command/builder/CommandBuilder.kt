@@ -77,14 +77,14 @@ class CommandBuilder private constructor(val name: String) {
         }
 
         return Command(
-                this.name,
-                this.aliases,
-                this.parameters.toArray(emptyArray()),
-                this.subcommands.toArray(
-                        emptyArray()
-                ),
-                executable,
-                this.handler
+            this.name,
+            this.aliases,
+            this.parameters.toArray(emptyArray()),
+            this.subcommands.toArray(
+                emptyArray()
+            ),
+            executable,
+            this.handler
         )
     }
 

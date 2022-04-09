@@ -1,6 +1,5 @@
 package me.cookie.abyssclient.utils.client
 
-import me.cookie.abyssclient.Phantom
 import net.minecraft.client.MinecraftClient
 import net.minecraft.util.Util
 import org.slf4j.Logger
@@ -9,7 +8,7 @@ import org.slf4j.Logger
 val mc = MinecraftClient.getInstance()!!
 
 val logger: Logger
-    get() = me.cookie.abyssclient.Phantom.logger
+    get() = me.cookie.abyssclient.Abyss.logger
 
 /**
  * Open uri in browser

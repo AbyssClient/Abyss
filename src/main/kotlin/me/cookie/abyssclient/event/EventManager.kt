@@ -1,6 +1,5 @@
 package me.cookie.abyssclient.event
 
-import me.cookie.abyssclient.Phantom
 import me.cookie.abyssclient.utils.client.Nameable
 import me.cookie.abyssclient.utils.client.logger
 import kotlin.reflect.full.findAnnotation
@@ -13,19 +12,19 @@ object EventManager {
     private val registry = mutableMapOf<Class<out Event>, ArrayList<EventHook<in Event>>>()
 
     val mappedEvents = arrayOf(
-            GameTickEvent::class,
-            ClientStartEvent::class,
-            OverlayRenderEvent::class,
-            InputHandleEvent::class,
-            KeyEvent::class,
-            ScreenEvent::class,
-            ToggleModuleEvent::class,
-            ClientShutdownEvent::class
+        GameTickEvent::class,
+        ClientStartEvent::class,
+        OverlayRenderEvent::class,
+        InputHandleEvent::class,
+        KeyEvent::class,
+        ScreenEvent::class,
+        ToggleModuleEvent::class,
+        ClientShutdownEvent::class
     ).map { Pair(it.findAnnotation<Nameable>()!!.name, it) }
 
     init {
         SequenceManager
-        me.cookie.abyssclient.Phantom
+        me.cookie.abyssclient.Abyss
     }
 
     /**

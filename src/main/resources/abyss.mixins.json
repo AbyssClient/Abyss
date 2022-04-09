@@ -1,23 +1,23 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "de.vincentschweiger.phantomclient.mixins",
+  "package": "me.cookie.abyssclient.mixins",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
   ],
   "client": [
-    "me.cookie.abyssclient.mixins.gui.MixinInGameHud",
-    "me.cookie.abyssclient.mixins.client.MixinMinecraftClient",
-    "me.cookie.abyssclient.mixins.client.MinecraftClientAccessor",
-    "me.cookie.abyssclient.mixins.render.MixinPlayerEntityRenderer",
-    "me.cookie.abyssclient.mixins.render.InvokerEntityModelLayers",
-    "me.cookie.abyssclient.mixins.render.MixinGameRenderer",
-    "me.cookie.abyssclient.mixins.client.MixinWindow",
-    "me.cookie.abyssclient.mixins.client.MixinMouse",
-    "me.cookie.abyssclient.mixins.client.MixinKeyboard",
-    "me.cookie.abyssclient.mixins.client.GameOptionsAccessor",
-    "me.cookie.abyssclient.mixins.gui.MixinScreen",
-    "me.cookie.abyssclient.mixins.client.MixinClientPlayerEntity"
+    "gui.MixinInGameHud",
+    "client.MixinMinecraftClient",
+    "client.MinecraftClientAccessor",
+    "render.MixinPlayerEntityRenderer",
+    "render.InvokerEntityModelLayers",
+    "render.MixinGameRenderer",
+    "client.MixinWindow",
+    "client.MixinMouse",
+    "client.MixinKeyboard",
+    "client.GameOptionsAccessor",
+    "gui.MixinScreen",
+    "client.MixinClientPlayerEntity"
   ],
   "injectors": {
     "defaultRequire": 1

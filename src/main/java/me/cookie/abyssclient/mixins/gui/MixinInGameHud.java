@@ -2,8 +2,6 @@ package me.cookie.abyssclient.mixins.gui;
 
 import me.cookie.abyssclient.event.EventManager;
 import me.cookie.abyssclient.event.OverlayRenderEvent;
-import me.cookie.abyssclient.event.EventManager;
-import me.cookie.abyssclient.event.OverlayRenderEvent;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
 import org.spongepowered.asm.mixin.Mixin;

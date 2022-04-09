@@ -1,4 +1,5 @@
 package me.cookie.abyssclient.render.ultralight.listener
+
 import com.labymedia.ultralight.UltralightView
 import com.labymedia.ultralight.input.UltralightCursor
 import com.labymedia.ultralight.math.IntRect
@@ -16,7 +17,7 @@ class ViewListener : UltralightViewListener {
      *
      * @param title The new page title
      */
-    override fun onChangeTitle(title: String) { }
+    override fun onChangeTitle(title: String) {}
 
     /**
      * Called by Ultralight when the view URL changes.
@@ -32,7 +33,7 @@ class ViewListener : UltralightViewListener {
      *
      * @param tooltip The new page tooltip
      */
-    override fun onChangeTooltip(tooltip: String) { }
+    override fun onChangeTooltip(tooltip: String) {}
 
     /**
      * Called by Ultralight when the cursor changes. Ultralight supports a lot of cursors, but currently not a custom

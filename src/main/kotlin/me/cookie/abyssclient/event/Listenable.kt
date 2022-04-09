@@ -4,7 +4,12 @@ import me.cookie.abyssclient.utils.client.logger
 
 typealias Handler<T> = (T) -> Unit
 
-class EventHook<T : Event>(val handlerClass: Listenable, val handler: Handler<T>, val ignoresCondition: Boolean, val priority: Int = 0)
+class EventHook<T : Event>(
+    val handlerClass: Listenable,
+    val handler: Handler<T>,
+    val ignoresCondition: Boolean,
+    val priority: Int = 0
+)
 
 interface Listenable {
 
@@ -20,7 +25,11 @@ interface Listenable {
 
 }
 
-inline fun <reified T : Event> Listenable.handler(ignoreCondition: Boolean = false, priority: Int = 0, noinline handler: Handler<T>) {
+inline fun <reified T : Event> Listenable.handler(
+    ignoreCondition: Boolean = false,
+    priority: Int = 0,
+    noinline handler: Handler<T>
+) {
     logger.debug("Registering event hook: ", T::class.java)
     EventManager.registerEventHook(T::class.java, EventHook(this, handler, ignoreCondition, priority))
 }
@@ -28,7 +37,10 @@ inline fun <reified T : Event> Listenable.handler(ignoreCondition: Boolean = fal
 /**
  * Registers an event hook for events of type [T] and launches a sequence
  */
-inline fun <reified T : Event> Listenable.sequenceHandler(ignoreCondition: Boolean = false, noinline eventHandler: SuspendableHandler<T>) {
+inline fun <reified T : Event> Listenable.sequenceHandler(
+    ignoreCondition: Boolean = false,
+    noinline eventHandler: SuspendableHandler<T>
+) {
     handler<T>(ignoreCondition) { event -> Sequence(eventHandler, event) }
 }
 

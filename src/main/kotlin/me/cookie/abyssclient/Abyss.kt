@@ -6,7 +6,6 @@ import me.cookie.abyssclient.event.*
 import me.cookie.abyssclient.module.ModuleManager
 import me.cookie.abyssclient.render.ultralight.UltralightEngine
 import me.cookie.abyssclient.ui.PositioningScreen
-import me.cookie.abyssclient.ui.ConfigScreen
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.client.MinecraftClient
@@ -17,22 +16,28 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import kotlin.system.exitProcess
 
-object Phantom : Listenable {
-    const val CLIENT_NAME = "Phantom"
-    val CLIENT_VERSION: String = FabricLoader.getInstance().getModContainer("phantom").get().metadata.version.friendlyString
+object Abyss : Listenable {
+    const val CLIENT_NAME = "Abyss"
+    val CLIENT_VERSION: String =
+        FabricLoader.getInstance().getModContainer("abyss").get().metadata.version.friendlyString
     const val CLIENT_AUTHOR = "Vento"
     const val LIQUID_CLIENT_CLOUD = "https://cloud.liquidbounce.net/LiquidBounce"
 
-    val logger: Logger = LoggerFactory.getLogger(me.cookie.abyssclient.Phantom.CLIENT_NAME)!!
-    private val kb: KeyBinding = KeyBindingHelper.registerKeyBinding(KeyBinding("phantom.keybinding.positioning", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_RIGHT_SHIFT, "Phantom"))
-    private val kb2: KeyBinding = KeyBindingHelper.registerKeyBinding(KeyBinding("other config screen thing", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_B, "Phantom"))
+    val logger: Logger = LoggerFactory.getLogger(CLIENT_NAME)!!
+    private val kb: KeyBinding = KeyBindingHelper.registerKeyBinding(
+        KeyBinding(
+            "abyss.keybinding.positioning",
+            InputUtil.Type.KEYSYM,
+            GLFW.GLFW_KEY_RIGHT_SHIFT,
+            "Phantom"
+        )
+    )
 
     /**
      * Called every tick
      */
     val tickHandler = handler<GameTickEvent> {
-        if (me.cookie.abyssclient.Phantom.kb.wasPressed()) MinecraftClient.getInstance().setScreen(PositioningScreen())
-        if (me.cookie.abyssclient.Phantom.kb2.wasPressed()) MinecraftClient.getInstance().setScreen(ConfigScreen())
+        if (kb.wasPressed()) MinecraftClient.getInstance().setScreen(PositioningScreen())
     }
 
     /**
@@ -40,7 +45,7 @@ object Phantom : Listenable {
      */
     val startHandler = handler<ClientStartEvent> {
         runCatching {
-            me.cookie.abyssclient.Phantom.logger.info("Launching ${me.cookie.abyssclient.Phantom.CLIENT_NAME} v${me.cookie.abyssclient.Phantom.CLIENT_VERSION} by ${me.cookie.abyssclient.Phantom.CLIENT_AUTHOR}")
+            logger.info("Launching $CLIENT_NAME v$CLIENT_VERSION by $CLIENT_AUTHOR")
             // Stuff
             EventManager
             ConfigSystem
@@ -55,9 +60,9 @@ object Phantom : Listenable {
             // Load config
             ConfigSystem.load()
         }.onSuccess {
-            me.cookie.abyssclient.Phantom.logger.info("Successfully loaded client!")
+            logger.info("Successfully loaded client!")
         }.onFailure {
-            me.cookie.abyssclient.Phantom.logger.error("Unable to load client.", it)
+            logger.error("Unable to load client.", it)
             exitProcess(1)
         }
     }
@@ -66,7 +71,7 @@ object Phantom : Listenable {
      * Called on shutdown
      */
     val shutdownHandler = handler<ClientShutdownEvent> {
-        me.cookie.abyssclient.Phantom.logger.info("Shutting down phantom ...")
+        logger.info("Shutting down abyss ...")
         ConfigSystem.store()
         UltralightEngine.shutdown()
     }

@@ -4,8 +4,9 @@ import com.google.gson.GsonBuilder
 import com.google.gson.JsonElement
 import com.google.gson.JsonParser
 import com.google.gson.reflect.TypeToken
-import me.cookie.abyssclient.Phantom
-import me.cookie.abyssclient.config.adapters.*
+import me.cookie.abyssclient.config.adapters.ChoiceConfigurableSerializer
+import me.cookie.abyssclient.config.adapters.ConfigurableSerializer
+import me.cookie.abyssclient.config.adapters.ItemValueSerializer
 import me.cookie.abyssclient.config.util.ExcludeStrategy
 import me.cookie.abyssclient.utils.client.logger
 import me.cookie.abyssclient.utils.client.mc
@@ -14,8 +15,8 @@ import java.io.File
 
 object ConfigSystem {
     val rootFolder = File(
-            mc.runDirectory,
-            me.cookie.abyssclient.Phantom.CLIENT_NAME
+        mc.runDirectory,
+        me.cookie.abyssclient.Abyss.CLIENT_NAME
     ).apply { // Check if there is already a config folder and if not create new folder (mkdirs not needed - .minecraft should always exist)
         if (!exists()) {
             mkdir()
@@ -25,10 +26,10 @@ object ConfigSystem {
     private val configurables: MutableList<Configurable> = mutableListOf()
     private val confType = TypeToken.get(Configurable::class.java).type
     private val gson = GsonBuilder().setPrettyPrinting().addSerializationExclusionStrategy(ExcludeStrategy(false))
-            .registerTypeHierarchyAdapter(Item::class.javaObjectType, ItemValueSerializer)
-            .registerTypeAdapter(ChoiceConfigurable::class.javaObjectType, ChoiceConfigurableSerializer)
-            .registerTypeHierarchyAdapter(Configurable::class.javaObjectType, ConfigurableSerializer)
-            .create()
+        .registerTypeHierarchyAdapter(Item::class.javaObjectType, ItemValueSerializer)
+        .registerTypeAdapter(ChoiceConfigurable::class.javaObjectType, ChoiceConfigurableSerializer)
+        .registerTypeHierarchyAdapter(Configurable::class.javaObjectType, ConfigurableSerializer)
+        .create()
 
     /**
      * Create a new root configurable
@@ -75,7 +76,7 @@ object ConfigSystem {
             }
 
             val values =
-                    jsonObject.getAsJsonArray("value").map { it.asJsonObject }.associateBy { it["name"].asString!! }
+                jsonObject.getAsJsonArray("value").map { it.asJsonObject }.associateBy { it["name"].asString!! }
 
             for (value in configurable.value) {
                 if (value is Configurable) {

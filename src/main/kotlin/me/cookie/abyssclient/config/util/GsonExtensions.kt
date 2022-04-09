@@ -12,7 +12,7 @@ annotation class Exclude
 class ExcludeStrategy(val internal: Boolean) : ExclusionStrategy {
     override fun shouldSkipClass(clazz: Class<*>?) = false
     override fun shouldSkipField(field: FieldAttributes) =
-            field.getAnnotation(Exclude::class.java) != null
+        field.getAnnotation(Exclude::class.java) != null
 }
 
 /**
