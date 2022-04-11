@@ -32,12 +32,12 @@ class PositioningScreen : Screen(LiteralText.EMPTY) {
     }
 
     private fun getNearestModule(): UIModule {
-        var moduleCoords: MutableMap<Point2D.Double, UIModule> = HashMap()
+        val moduleCoords: MutableMap<Point2D.Double, UIModule> = HashMap()
         ModuleManager.getUIModules().filter { it != draggedModule!! }.forEach { m ->
             moduleCoords[Point2D.Double(m.x, m.y)] = m
         }
-        var coords: Set<Point2D.Double> = moduleCoords.keys
-        var source = Point2D.Double(draggedModule!!.x, draggedModule!!.y)
+        val coords: Set<Point2D.Double> = moduleCoords.keys
+        val source = Point2D.Double(draggedModule!!.x, draggedModule!!.y)
         var nearestPoint = coords.first()
         for (coord in coords) {
             val npDist = nearestPoint.distance(source)
@@ -58,8 +58,9 @@ class PositioningScreen : Screen(LiteralText.EMPTY) {
             ) {
                 val nearestModule = getNearestModule()
                 var newX = draggedModule!!.getScaledX() + distX
-                var newY = draggedModule!!.getScaledY() + distY
-                if (newX < (nearestModule.getScaledX() + 6) && newX > (nearestModule.getScaledX() - 6)) {
+                val newY = draggedModule!!.getScaledY() + distY
+                val xDist = 3
+                if (newX < (nearestModule.getScaledX() + xDist) && newX > (nearestModule.getScaledX() - xDist)) {
                     newX = nearestModule.getScaledX()
                 }
                 draggedModule!!.setPosition(newX, newY)

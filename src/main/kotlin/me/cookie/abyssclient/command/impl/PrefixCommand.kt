@@ -21,7 +21,7 @@ object PrefixCommand : CommandCreator {
             .handler { cmd, args ->
                 val newPrefix = args[0] as String
                 CommandManager.Options.prefix = newPrefix
-                chat(TranslatableText("${cmd.translationBaseKey}.prefixSet", newPrefix))
+                chat(TranslatableText("${cmd.translationBaseKey}.set", newPrefix))
             }
             .build()
     }

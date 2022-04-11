@@ -49,6 +49,15 @@ object ModuleManager : Listenable, Iterable<Module> by modules {
         modules += module
     }
 
+    fun getModule(name: String): Module? {
+        for (module in modules) {
+            if (module.name == name) {
+                return module
+            }
+        }
+        return null
+    }
+
     /**
      * @return A list of UIModules (Modules with UI)
      */
@@ -62,7 +71,6 @@ object ModuleManager : Listenable, Iterable<Module> by modules {
 
     /**
      * ?Autocomplete module names ig?
-     * stolen from liquidbounce
      */
     fun autoComplete(begin: String, validator: (Module) -> Boolean = { true }): List<String> {
         return filter { it.name.startsWith(begin, true) && validator(it) }.map { it.name }

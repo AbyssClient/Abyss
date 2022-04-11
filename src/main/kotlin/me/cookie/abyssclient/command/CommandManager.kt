@@ -5,6 +5,7 @@ import com.mojang.brigadier.suggestion.Suggestions
 import com.mojang.brigadier.suggestion.SuggestionsBuilder
 import me.cookie.abyssclient.command.impl.HelloCommand
 import me.cookie.abyssclient.command.impl.PrefixCommand
+import me.cookie.abyssclient.command.impl.ToggleCommand
 import me.cookie.abyssclient.config.ConfigSystem
 import me.cookie.abyssclient.config.Configurable
 import me.cookie.abyssclient.event.ChatSendEvent
@@ -99,7 +100,8 @@ object CommandManager : Iterable<Command> {
     fun registerInbuilt() {
         val builtIn = arrayOf(
             HelloCommand,
-            PrefixCommand
+            PrefixCommand,
+            ToggleCommand
         )
         builtIn.onEach {
             commands.add(it.createCommand())
