@@ -11,6 +11,6 @@
   "abyss.commands.unknownParameter": "Unknown parameter \"%s\".",
   "abyss.commands.commandNotExecutable": "Command \"%s\" is not executable.",
   "abyss.commands.prefix.set": "Set the command prefix to \"%s\".",
-  "abyss.commands.toggle.enabled": "Enabled \"%s\".",
-  "abyss.commands.toggle.disabled": "Disabled \"%s\"."
+  "abyss.commands.toggle.enabled": "Enabled \"%s\"",
+  "abyss.commands.toggle.disabled": "Disabled \"%s\""
 }
