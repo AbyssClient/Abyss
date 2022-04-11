@@ -6,6 +6,7 @@ import me.cookie.abyssclient.event.*
 import me.cookie.abyssclient.module.ModuleManager
 import me.cookie.abyssclient.render.ultralight.UltralightEngine
 import me.cookie.abyssclient.ui.PositioningScreen
+import me.cookie.abyssclient.utils.client.mc
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.client.MinecraftClient
@@ -51,7 +52,6 @@ object Abyss : Listenable {
             ConfigSystem
             ModuleManager
             CommandManager
-
             UltralightEngine.init()
 
             // Register commands & modules
