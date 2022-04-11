@@ -9,7 +9,7 @@ object HelloCommand : CommandCreator {
     override fun createCommand(): Command {
         return CommandBuilder
             .begin("hello")
-            .handler { command, args -> chat("Hello World!") }
+            .handler { _, _ -> chat("Hello World!") }
             .build()
     }
 

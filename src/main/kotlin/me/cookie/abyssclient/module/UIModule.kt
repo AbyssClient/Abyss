@@ -47,7 +47,7 @@ abstract class UIModule(
 
     open val color: Color = Color.WHITE
 
-    fun render(enabled: Boolean) {
+    open fun render(enabled: Boolean) {
         stack.push()
         if (enabled) {
             mc.textRenderer.drawWithShadow(stack, getText(), getScaledX().toFloat(), getScaledY().toFloat(), color.rgb)

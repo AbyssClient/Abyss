@@ -50,7 +50,7 @@ object CommandExecutor : Listenable {
                 }
             } catch (e: Exception) {
                 chat(
-                    TranslatableText("phantom.commands.exceptionOccurred", e).styled { style ->
+                    TranslatableText("abyss.commands.exceptionOccurred", e).styled { style ->
                         style.withColor(
                             Formatting.RED
                         )
@@ -177,7 +177,7 @@ object CommandManager : Iterable<Command> {
         // unknown
         val pair = getSubCommand(args) ?: throw CommandException(
             TranslatableText(
-                "phantom.commands.unknownCommand",
+                "abyss.commands.unknownCommand",
                 args[0]
             )
         )
@@ -186,7 +186,7 @@ object CommandManager : Iterable<Command> {
         // If the command is not executable, don't allow it to be executed
         if (!command.executable) {
             throw CommandException(
-                TranslatableText("phantom.commands.invalidUsage", args[0]),
+                TranslatableText("abyss.commands.invalidUsage", args[0]),
                 usageInfo = command.usage()
             )
         }
@@ -197,7 +197,7 @@ object CommandManager : Iterable<Command> {
         // If there are more arguments for a command that takes no parameters
         if (command.parameters.isEmpty() && idx != args.size - 1) {
             throw CommandException(
-                TranslatableText("phantom.commands.commandTakesNoParameters"),
+                TranslatableText("abyss.commands.commandTakesNoParameters"),
                 usageInfo = command.usage()
             )
         }
@@ -206,7 +206,7 @@ object CommandManager : Iterable<Command> {
         if (args.size - idx - 1 < command.parameters.size && command.parameters[args.size - idx - 1].required) {
             throw CommandException(
                 TranslatableText(
-                    "phantom.commands.parameterRequired",
+                    "abyss.commands.parameterRequired",
                     command.parameters[args.size - idx - 1].name
                 ),
                 usageInfo = command.usage()
@@ -229,7 +229,7 @@ object CommandManager : Iterable<Command> {
             // Check if there is a parameter for this index
             if (paramIndex >= command.parameters.size) {
                 throw CommandException(
-                    TranslatableText("phantom.commands.unknownParameter", args[i]),
+                    TranslatableText("abyss.commands.unknownParameter", args[i]),
                     usageInfo = command.usage()
                 )
             }
@@ -261,7 +261,7 @@ object CommandManager : Iterable<Command> {
 
         if (!command.executable) {
             throw CommandException(
-                TranslatableText("phantom.commands.commandNotExecutable", command.name),
+                TranslatableText("abyss.commands.commandNotExecutable", command.name),
                 usageInfo = command.usage()
             )
         }
@@ -282,7 +282,7 @@ object CommandManager : Iterable<Command> {
             if (validationResult.errorMessage != null) {
                 throw CommandException(
                     TranslatableText(
-                        "phantom.commands.invalidParameterValue",
+                        "abyss.commands.invalidParameterValue",
                         parameter.name,
                         argument,
                         validationResult.errorMessage

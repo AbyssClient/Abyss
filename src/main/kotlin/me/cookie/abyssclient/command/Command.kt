@@ -16,7 +16,7 @@ class Command(
     var parentCommand: Command? = null
 ) {
     val translationBaseKey: String
-        get() = "liquidbounce.command.${getParentKeys(this, name)}"
+        get() = "abyss.command.${getParentKeys(this, name)}"
 
     val description: TranslatableText
         get() = TranslatableText("$translationBaseKey.description")

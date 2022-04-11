@@ -18,10 +18,10 @@ object PrefixCommand : CommandCreator {
                     .required()
                     .build()
             )
-            .handler { _, args ->
+            .handler { cmd, args ->
                 val newPrefix = args[0] as String
                 CommandManager.Options.prefix = newPrefix
-                chat(TranslatableText("phantom.commands.prefixSet", newPrefix))
+                chat(TranslatableText("${cmd.translationBaseKey}.prefixSet", newPrefix))
             }
             .build()
     }

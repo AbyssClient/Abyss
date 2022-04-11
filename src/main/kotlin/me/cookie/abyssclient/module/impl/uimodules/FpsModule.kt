@@ -1,4 +1,4 @@
-package me.cookie.abyssclient.module.impl
+package me.cookie.abyssclient.module.impl.uimodules
 
 import me.cookie.abyssclient.module.UIModule
 
