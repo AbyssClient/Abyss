@@ -5,8 +5,8 @@ import me.cookie.abyssclient.config.ConfigSystem
 import me.cookie.abyssclient.event.*
 import me.cookie.abyssclient.module.ModuleManager
 import me.cookie.abyssclient.render.ultralight.UltralightEngine
+import me.cookie.abyssclient.server.SocketClient
 import me.cookie.abyssclient.ui.PositioningScreen
-import me.cookie.abyssclient.utils.client.mc
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.client.MinecraftClient
@@ -53,12 +53,12 @@ object Abyss : Listenable {
             ModuleManager
             CommandManager
             UltralightEngine.init()
-
             // Register commands & modules
             ModuleManager.registerInbuilt()
             CommandManager.registerInbuilt()
             // Load config
             ConfigSystem.load()
+            SocketClient
         }.onSuccess {
             logger.info("Successfully loaded client!")
         }.onFailure {
@@ -72,6 +72,7 @@ object Abyss : Listenable {
      */
     val shutdownHandler = handler<ClientShutdownEvent> {
         logger.info("Shutting down abyss ...")
+        SocketClient.running.set(false)
         ConfigSystem.store()
         UltralightEngine.shutdown()
     }

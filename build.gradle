@@ -74,8 +74,12 @@ dependencies {
     includeImplementation("com.github.LlamaLad7:MixinExtras:0.0.6")
     annotationProcessor("com.github.LlamaLad7:MixinExtras:0.0.6")
     // Libraries
-    implementation ":theme"
-
+    includeImplementation ":theme"
+    includeImplementation("io.ktor:ktor-client-core:${project.ktor_version}")
+    includeImplementation("io.ktor:ktor-client-cio:${project.ktor_version}")
+    includeImplementation("io.ktor:ktor-client-websockets:${project.ktor_version}")
+    includeImplementation("com.github.luben:zstd-jni:${project.zstd_version}")
+    includeImplementation("com.github.ben-manes.caffeine:caffeine:${project.caffeine_version}")
     includeImplementation "com.labymedia:ultralight-java-base:${project.ultralight_version}"
     includeImplementation "com.labymedia:ultralight-java-databind:${project.ultralight_version}"
     includeImplementation "com.labymedia:ultralight-java-gpu:${project.ultralight_version}"
