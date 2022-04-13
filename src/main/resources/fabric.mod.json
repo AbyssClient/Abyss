@@ -15,6 +15,7 @@
   "license": "GPLv3",
   "icon": "assets/abyss/icon.png",
   "environment": "client",
+  "accessWidener": "abyss.accesswidener",
   "entrypoints": {
     "main": [],
     "preLaunch": [

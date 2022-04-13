@@ -3,8 +3,11 @@ package me.cookie.abyssclient.event
 import me.cookie.abyssclient.config.Value
 import me.cookie.abyssclient.utils.client.Nameable
 import net.minecraft.client.gui.screen.Screen
+import net.minecraft.client.network.AbstractClientPlayerEntity
 import net.minecraft.client.util.InputUtil
 import net.minecraft.client.util.math.MatrixStack
+import net.minecraft.client.world.ClientWorld
+import net.minecraft.entity.Entity
 
 // Game events
 @Nameable("gameTick")
@@ -75,3 +78,20 @@ class ValueChangedEvent(val value: Value<*>) : Event()
 
 @Nameable("toggleModule")
 class ToggleModuleEvent(val module: me.cookie.abyssclient.module.Module, val newState: Boolean) : Event()
+
+// Game events
+@Nameable("playerRender")
+class PlayerRenderEvent(val player: AbstractClientPlayerEntity) : Event()
+
+@Nameable("joinWorld")
+class WorldJoinEvent(val world: ClientWorld) : Event()
+
+@Nameable("worldDisconnect")
+class WorldDisconnectEvent : Event()
+
+/**
+ * Also fired when client joins world
+ * => fired for every entity that gets tracked
+ */
+@Nameable("playerJoinWorld")
+class PlayerJoinWorldEvent(val player: AbstractClientPlayerEntity) : Event()

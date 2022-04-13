@@ -4,6 +4,7 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.cancelChildren
 import me.cookie.abyssclient.command.CommandManager
 import me.cookie.abyssclient.config.ConfigSystem
+import me.cookie.abyssclient.cosmetics.Cosmetic
 import me.cookie.abyssclient.event.*
 import me.cookie.abyssclient.module.ModuleManager
 import me.cookie.abyssclient.render.ultralight.UltralightEngine
@@ -61,6 +62,7 @@ object Abyss : Listenable {
             // Load config
             ConfigSystem.load()
             SocketClient.job.start()
+            Cosmetic
         }.onSuccess {
             logger.info("Successfully loaded client!")
         }.onFailure {

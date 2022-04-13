@@ -23,6 +23,10 @@ crowdintranslate.minecraftProjectName = 'abyss'
 crowdintranslate.verbose = false
 
 
+loom {
+    accessWidenerPath = file("src/main/resources/abyss.accesswidener")
+}
+
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 

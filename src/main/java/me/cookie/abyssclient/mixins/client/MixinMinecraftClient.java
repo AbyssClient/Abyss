@@ -3,6 +3,7 @@ package me.cookie.abyssclient.mixins.client;
 import me.cookie.abyssclient.event.*;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.world.ClientWorld;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -62,5 +63,14 @@ public class MixinMinecraftClient {
             callbackInfo.cancel();
     }
 
-
+    /**
+     * Hook world joining
+     *
+     * @param world        joined world
+     * @param callbackInfo not needed
+     */
+    @Inject(method = "joinWorld", at = @At("RETURN"))
+    private void onJoinWorld(ClientWorld world, CallbackInfo callbackInfo) {
+        EventManager.INSTANCE.callEvent(new WorldJoinEvent(world));
+    }
 }

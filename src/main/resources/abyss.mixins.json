@@ -4,8 +4,6 @@
   "package": "me.cookie.abyssclient.mixins",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-  ],
-  "client": [
     "client.GameOptionsAccessor",
     "client.MinecraftClientAccessor",
     "client.MixinClientPlayerEntity",
@@ -16,10 +14,13 @@
     "gui.MixinInGameHud",
     "gui.MixinScreen",
     "gui.PlayerListHudInvoker",
+    "gui.PlayerListHudMixin",
     "render.InvokerEntityModelLayers",
     "render.MixinGameRenderer",
     "render.MixinPlayerEntityRenderer",
-    "gui.PlayerListHudMixin"
+    "world.MixinClientEntityHandler",
+    "world.MixinClientWorld",
+    "world.MixinWorld"
   ],
   "injectors": {
     "defaultRequire": 1
