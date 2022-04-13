@@ -1,5 +1,7 @@
 package me.cookie.abyssclient
 
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.cancelChildren
 import me.cookie.abyssclient.command.CommandManager
 import me.cookie.abyssclient.config.ConfigSystem
 import me.cookie.abyssclient.event.*
@@ -58,7 +60,7 @@ object Abyss : Listenable {
             CommandManager.registerInbuilt()
             // Load config
             ConfigSystem.load()
-            SocketClient
+            SocketClient.job.start()
         }.onSuccess {
             logger.info("Successfully loaded client!")
         }.onFailure {
@@ -72,8 +74,9 @@ object Abyss : Listenable {
      */
     val shutdownHandler = handler<ClientShutdownEvent> {
         logger.info("Shutting down abyss ...")
-        SocketClient.running.set(false)
         ConfigSystem.store()
         UltralightEngine.shutdown()
+        SocketClient.job.cancelChildren()
+        SocketClient.job.cancel()
     }
 }
