@@ -68,12 +68,11 @@ dependencies {
     modIncludeImplementation(fabricApi.module("fabric-rendering-v1", project.fabric_version))
     modIncludeImplementation(fabricApi.module("fabric-resource-loader-v0", project.fabric_version))
     modIncludeImplementation("net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}")
-    // 3'rd party mods
+    // 3'rd party mods for optimizations in IDE
     modImplementation "maven.modrinth:lazydfu:0.1.2"
-    // MixinExtras
+    // Libraries
     includeImplementation("com.github.LlamaLad7:MixinExtras:0.0.6")
     annotationProcessor("com.github.LlamaLad7:MixinExtras:0.0.6")
-    // Libraries
     includeImplementation ":theme"
     includeImplementation("io.ktor:ktor-client-core:${project.ktor_version}")
     includeImplementation("io.ktor:ktor-client-cio:${project.ktor_version}")
