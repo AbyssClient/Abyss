@@ -5,8 +5,6 @@ import kotlinx.coroutines.runBlocking
 import me.cookie.abyssclient.Abyss.ROOT_URL
 import me.cookie.abyssclient.config.ConfigSystem
 import me.cookie.abyssclient.event.Listenable
-import me.cookie.abyssclient.event.PlayerJoinWorldEvent
-import me.cookie.abyssclient.event.handler
 import me.cookie.abyssclient.server.getPlayer
 import me.cookie.abyssclient.utils.client.mc
 import me.cookie.abyssclient.utils.io.HttpClient
@@ -28,10 +26,6 @@ object Cosmetic : Listenable {
     }
 
     val capes = HashMap<String, Identifier>()
-
-    val playerJoinHandler = handler<PlayerJoinWorldEvent> { event ->
-        getPlayer(event.player.uuidAsString)
-    }
 
     fun loadCapes() {
         runBlocking {
