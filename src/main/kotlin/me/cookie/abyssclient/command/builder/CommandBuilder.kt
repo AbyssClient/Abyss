@@ -11,6 +11,7 @@ class CommandBuilder private constructor(val name: String) {
     private var subcommands: ArrayList<Command> = ArrayList()
     private var handler: CommandHandler? = null
     private var executable = true
+    private var hidden = false
 
     companion object {
         fun begin(name: String): CommandBuilder = CommandBuilder(name)
@@ -37,6 +38,11 @@ class CommandBuilder private constructor(val name: String) {
     fun handler(handler: CommandHandler): CommandBuilder {
         this.handler = handler
 
+        return this
+    }
+
+    fun hide(): CommandBuilder {
+        this.hidden = true
         return this
     }
 
@@ -84,7 +90,8 @@ class CommandBuilder private constructor(val name: String) {
                 emptyArray()
             ),
             executable,
-            this.handler
+            this.handler,
+            hidden = hidden
         )
     }
 

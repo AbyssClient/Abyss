@@ -10,7 +10,11 @@
   "abyss.commands.parameterRequired": "Parameter \"%s\" is required.",
   "abyss.commands.unknownParameter": "Unknown parameter \"%s\".",
   "abyss.commands.commandNotExecutable": "Command \"%s\" is not executable.",
-  "abyss.commands.prefix.set": "Set the command prefix to \"%s\".",
-  "abyss.commands.toggle.enabled": "Enabled \"%s\"",
-  "abyss.commands.toggle.disabled": "Disabled \"%s\""
+  "abyss.command.prefix.set": "Set the command prefix to \"%s\".",
+  "abyss.command.toggle.enabled": "Enabled \"%s\"",
+  "abyss.command.toggle.disabled": "Disabled \"%s\"",
+  "abyss.command.help.result.pageNumberTooLarge": "The page number you have entered exceeds the number of available pages, it may at most be %d.",
+  "abyss.command.help.result.help": "Help",
+  "abyss.command.help.result.pageCount": "Page: %s",
+  "abyss.command.help.result.page": "page"
 }

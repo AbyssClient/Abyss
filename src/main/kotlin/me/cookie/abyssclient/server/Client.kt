@@ -13,9 +13,8 @@ import me.cookie.abyssclient.utils.client.mc
 import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.launch
-import me.cookie.abyssclient.utils.client.logger
 
-private val playerCache: Cache<String, Player> = Caffeine.newBuilder().maximumSize(1_000).expireAfterWrite(
+val playerCache: Cache<String, Player> = Caffeine.newBuilder().maximumSize(1_000).expireAfterWrite(
     60, TimeUnit.MINUTES
 ).recordStats().build()
 

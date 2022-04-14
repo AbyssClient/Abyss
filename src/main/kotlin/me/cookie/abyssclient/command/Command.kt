@@ -13,10 +13,11 @@ class Command(
     val subcommands: Array<Command>,
     val executable: Boolean,
     val handler: CommandHandler?,
-    var parentCommand: Command? = null
+    var parentCommand: Command? = null,
+    val hidden: Boolean,
 ) {
     val translationBaseKey: String
-        get() = "abyss.commands.${getParentKeys(this, name)}"
+        get() = "abyss.command.${getParentKeys(this, name)}"
 
     val description: TranslatableText
         get() = TranslatableText("$translationBaseKey.description")
