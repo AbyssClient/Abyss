@@ -17,8 +17,8 @@ object HelloCommand : CommandCreator {
                 val world = mc.world
                 val players = world!!.players!!
                 for (player in players) {
-                    val playerObj = getPlayer(player.uuidAsString)
-                    println(playerObj?.uuid ?: "player is null")
+                    val playerObj = getPlayer(player.uuidAsString) ?: continue
+                    println("${playerObj.cosmetics.cape}")
                 }
             }
             .build()

@@ -8,11 +8,13 @@ import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.websocket.*
 import io.ktor.http.*
 import io.ktor.websocket.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 import me.cookie.abyssclient.utils.client.mc
 import java.util.*
 import java.util.concurrent.TimeUnit
-import kotlinx.coroutines.launch
 
 val playerCache: Cache<String, Player> = Caffeine.newBuilder().maximumSize(1_000).expireAfterWrite(
     60, TimeUnit.MINUTES
@@ -54,8 +56,19 @@ object SocketClient {
                         if (list[0] == "player") {
                             val uuid = list[1]
                             val state = list[2].toBooleanStrict()
+                            if (state) {
+                                val cape = list[3]
+                                playerCache.put(
+                                    uuid, Player(
+                                        uuid, state, Cosmetics(
+                                            cape = Cape(cape)
+                                        )
+                                    )
+                                )
+                            } else {
+                                playerCache.put(uuid, Player(uuid, state))
+                            }
                             queue.remove(uuid)
-                            playerCache.put(uuid, Player(uuid, state))
                         }
                     }
                 }

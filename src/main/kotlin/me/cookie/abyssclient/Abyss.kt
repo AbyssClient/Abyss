@@ -1,6 +1,5 @@
 package me.cookie.abyssclient
 
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.cancelChildren
 import me.cookie.abyssclient.command.CommandManager
 import me.cookie.abyssclient.config.ConfigSystem
@@ -25,6 +24,7 @@ object Abyss : Listenable {
     val CLIENT_VERSION: String =
         FabricLoader.getInstance().getModContainer("abyss").get().metadata.version.friendlyString
     const val CLIENT_AUTHOR = "Vento"
+    const val ROOT_URL = "http://0.0.0.0:8080"
     const val LIQUID_CLIENT_CLOUD = "https://cloud.liquidbounce.net/LiquidBounce"
 
     val logger: Logger = LoggerFactory.getLogger(CLIENT_NAME)!!
@@ -63,6 +63,7 @@ object Abyss : Listenable {
             ConfigSystem.load()
             SocketClient.job.start()
             Cosmetic
+            Cosmetic.loadCapes()
         }.onSuccess {
             logger.info("Successfully loaded client!")
         }.onFailure {
