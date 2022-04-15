@@ -4,6 +4,7 @@ import com.google.gson.JsonParser
 import kotlinx.coroutines.runBlocking
 import me.cookie.abyssclient.Abyss.ROOT_URL
 import me.cookie.abyssclient.config.ConfigSystem
+import me.cookie.abyssclient.config.Configurable
 import me.cookie.abyssclient.event.Listenable
 import me.cookie.abyssclient.server.getPlayer
 import me.cookie.abyssclient.utils.client.mc
@@ -15,6 +16,15 @@ import net.minecraft.util.Identifier
 import java.io.File
 
 object Cosmetic : Listenable {
+
+    object Options : Configurable("cosmetics") {
+        // Should render capes?
+        val capes by boolean("capes", true)
+    }
+
+    init {
+        ConfigSystem.root(Options)
+    }
 
     private val cacheFolder = File(
         ConfigSystem.rootFolder,
@@ -46,6 +56,7 @@ object Cosmetic : Listenable {
     }
 
     fun getCapeTexture(player: AbstractClientPlayerEntity): Identifier? {
+        if (!Options.capes) return null
         val obj = getPlayer(player.uuidAsString) ?: return null
         val short = obj.cosmetics.cape
         if (short.enabled) {
