@@ -6,6 +6,7 @@ import me.cookie.abyssclient.module.impl.BetterPingList
 import me.cookie.abyssclient.module.impl.uimodules.ClockModule
 import me.cookie.abyssclient.module.impl.uimodules.FpsModule
 import me.cookie.abyssclient.module.impl.uimodules.HelloModule
+import me.cookie.abyssclient.module.impl.uimodules.XYZModule
 
 private val modules = mutableListOf<Module>()
 
@@ -23,7 +24,8 @@ object ModuleManager : Listenable, Iterable<Module> by modules {
             FpsModule,
             ClockModule,
             HelloModule,
-            BetterPingList
+            BetterPingList,
+            XYZModule
         )
         builtin.apply {
             sortBy { it.name }
