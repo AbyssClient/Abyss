@@ -15,7 +15,6 @@
     "gui.MixinScreen",
     "gui.PlayerListHudInvoker",
     "gui.PlayerListHudMixin",
-    "network.MixinAbstractClientPlayerEntity",
     "render.InvokerEntityModelLayers",
     "render.MixinGameRenderer",
     "render.MixinPlayerEntityRenderer",

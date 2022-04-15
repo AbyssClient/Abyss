@@ -12,6 +12,7 @@ import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import me.cookie.abyssclient.utils.client.mc
+import net.minecraft.client.network.AbstractClientPlayerEntity
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -20,12 +21,15 @@ val playerCache: Cache<String, Player> = Caffeine.newBuilder().maximumSize(1_000
 ).recordStats().build()
 
 private val queue = LinkedList<String>()
+
 fun getPlayer(uuid: String): Player? {
     if (playerCache.getIfPresent(uuid) != null) return playerCache.getIfPresent(uuid)!!
     if (!queue.contains(uuid)) queue.add(uuid)
 
     return null
 }
+
+fun getPlayer(player: AbstractClientPlayerEntity): Player? = getPlayer(player.uuidAsString)
 
 object SocketClient {
     val thread = GlobalScope.launch {

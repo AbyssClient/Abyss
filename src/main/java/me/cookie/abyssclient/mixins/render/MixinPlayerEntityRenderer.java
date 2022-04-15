@@ -1,5 +1,6 @@
 package me.cookie.abyssclient.mixins.render;
 
+import me.cookie.abyssclient.cosmetics.CapeRenderer;
 import me.cookie.abyssclient.event.EventManager;
 import me.cookie.abyssclient.event.PlayerRenderEvent;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -24,5 +25,10 @@ public abstract class MixinPlayerEntityRenderer extends LivingEntityRenderer<Abs
     @Inject(at = @At("HEAD"), method = "render(Lnet/minecraft/client/network/AbstractClientPlayerEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V")
     public void onRender(AbstractClientPlayerEntity abstractClientPlayerEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, CallbackInfo ci) {
         EventManager.INSTANCE.callEvent(new PlayerRenderEvent(abstractClientPlayerEntity));
+    }
+
+    @Inject(at = @At("TAIL"), method = "<init>")
+    public void hookInit(CallbackInfo callbackInfo) {
+        this.addFeature(new CapeRenderer(this));
     }
 }

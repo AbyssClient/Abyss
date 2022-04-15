@@ -55,9 +55,15 @@ object Cosmetic : Listenable {
         }
     }
 
+    fun hasCape(player: AbstractClientPlayerEntity): Boolean {
+        val obj = getPlayer(player)
+        if (obj != null) return obj.cosmetics.cape.enabled
+        return false
+    }
+
     fun getCapeTexture(player: AbstractClientPlayerEntity): Identifier? {
         if (!Options.capes) return null
-        val obj = getPlayer(player.uuidAsString) ?: return null
+        val obj = getPlayer(player) ?: return null
         val short = obj.cosmetics.cape
         if (short.enabled) {
             if (capes.containsKey(short.name))
