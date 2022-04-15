@@ -28,20 +28,12 @@ fun getPlayer(uuid: String): Player? {
 
 object SocketClient {
     val thread = GlobalScope.launch {
-        while (mc.player == null) {
-            delay(2000)
-        }
         val client = HttpClient(CIO) {
             install(WebSockets)
         }
-        client.ws(host = "localhost", port = 8080, path = "/ws") {
-            outgoing.invokeOnClose {
-                logger.warn("closing ws con")
-                client.close()
-                cancel()
-            }
+        client.wss(host = "abyss.vincentschweiger.de", path = "/ws") {
             // Shake hands
-            val str = "handshake\r${mc.player!!.gameProfile!!.id}\r"
+            val str = "handshake\r${mc.session.uuid}\r"
             sendCompressed(str)
             getPlayer("77798ea5-bc8b-4d46-8eb7-22d56ee142b1")
             launch {
@@ -51,7 +43,6 @@ object SocketClient {
             }
             while (isActive) {
                 incoming.consumeEach { frame ->
-                    logger.info("run")
                     val packet = readCompressed(frame.readBytes())
                     val split = packet.split('\r')
                     if (split.size < 0) return@consumeEach
