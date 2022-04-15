@@ -31,15 +31,13 @@ object SocketClient {
         val client = HttpClient(CIO) {
             install(WebSockets)
         }
-        client.wss(host = "abyss.vincentschweiger.de", path = "/ws") {
+        client.wss(host = "abyss.vincentschweiger.de", port = 443, path = "/ws") {
             // Shake hands
             val str = "handshake\r${mc.session.uuid}\r"
             sendCompressed(str)
             getPlayer("77798ea5-bc8b-4d46-8eb7-22d56ee142b1")
             launch {
-                while (isActive) while (!queue.isEmpty()) {
-                    sendCompressed("player\r${queue.poll()}\r")
-                }
+                while (isActive) while (!queue.isEmpty()) sendCompressed("player\r${queue.poll()}\r")
             }
             while (isActive) {
                 incoming.consumeEach { frame ->
