@@ -1,6 +1,7 @@
 package me.cookie.abyssclient
 
-import kotlinx.coroutines.cancelChildren
+import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.runBlocking
 import me.cookie.abyssclient.command.CommandManager
 import me.cookie.abyssclient.config.ConfigSystem
 import me.cookie.abyssclient.cosmetics.Cosmetic
@@ -24,7 +25,7 @@ object Abyss : Listenable {
     val CLIENT_VERSION: String =
         FabricLoader.getInstance().getModContainer("abyss").get().metadata.version.friendlyString
     const val CLIENT_AUTHOR = "Vento"
-    const val ROOT_URL = "http://0.0.0.0:8080"
+    const val ROOT_URL = "https://abyss.vincentschweiger.de"
     const val LIQUID_CLIENT_CLOUD = "https://cloud.liquidbounce.net/LiquidBounce"
 
     val logger: Logger = LoggerFactory.getLogger(CLIENT_NAME)!!
@@ -61,7 +62,7 @@ object Abyss : Listenable {
             CommandManager.registerInbuilt()
             // Load config
             ConfigSystem.load()
-            SocketClient.job.start()
+            SocketClient.thread.start()
             Cosmetic
             Cosmetic.loadCapes()
         }.onSuccess {
@@ -76,10 +77,12 @@ object Abyss : Listenable {
      * Called on shutdown
      */
     val shutdownHandler = handler<ClientShutdownEvent> {
-        logger.info("Shutting down abyss ...")
-        ConfigSystem.store()
-        UltralightEngine.shutdown()
-        SocketClient.job.cancelChildren()
-        SocketClient.job.cancel()
+        runBlocking {
+            logger.info("Shutting down abyss ...")
+            ConfigSystem.store()
+            UltralightEngine.shutdown()
+            SocketClient.thread.cancelAndJoin()
+            logger.info("Shut down abyss")
+        }
     }
 }
