@@ -3,7 +3,6 @@ package me.cookie.abyssclient.command.impl
 import me.cookie.abyssclient.command.Command
 import me.cookie.abyssclient.command.CommandCreator
 import me.cookie.abyssclient.command.builder.CommandBuilder
-import me.cookie.abyssclient.server.SocketClient
 import me.cookie.abyssclient.server.getPlayer
 import me.cookie.abyssclient.utils.client.chat
 import me.cookie.abyssclient.utils.client.mc

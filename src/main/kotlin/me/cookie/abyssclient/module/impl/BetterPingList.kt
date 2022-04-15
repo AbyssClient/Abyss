@@ -10,7 +10,7 @@ import net.minecraft.client.network.PlayerListEntry
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.math.MathHelper
 
-object BetterPingList : Module("BetterPingList", true){
+object BetterPingList : Module("BetterPingList", true) {
     val formatString by text("Format String", "%dms")
     val pingBars by boolean("Ping Bars", false)
 }

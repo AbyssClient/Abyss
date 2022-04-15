@@ -2,7 +2,6 @@ package me.cookie.abyssclient.command.impl
 
 import me.cookie.abyssclient.command.Command
 import me.cookie.abyssclient.command.CommandCreator
-import me.cookie.abyssclient.command.CommandManager
 import me.cookie.abyssclient.command.builder.CommandBuilder
 import me.cookie.abyssclient.command.builder.ParameterBuilder
 import me.cookie.abyssclient.module.ModuleManager
@@ -26,9 +25,9 @@ object ToggleCommand : CommandCreator {
                 if (module != null) {
                     module.enabled = !module.enabled
                     if (module.enabled) {
-                        chat(TranslatableText( "${cmd.translationBaseKey}.enabled", moduleName))
+                        chat(TranslatableText("${cmd.translationBaseKey}.enabled", moduleName))
                     } else {
-                        chat(TranslatableText( "${cmd.translationBaseKey}.disabled", moduleName))
+                        chat(TranslatableText("${cmd.translationBaseKey}.disabled", moduleName))
                     }
                 } else {
                     chat("Module not found".asText())

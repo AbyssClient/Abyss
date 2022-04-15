@@ -8,6 +8,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(PlayerListHud.class)
 public interface PlayerListHudInvoker {
-  @Invoker("renderLatencyIcon")
-  void invokeRenderLatencyIcon(MatrixStack matrices, int width, int x, int y, PlayerListEntry entry);
+    @Invoker("renderLatencyIcon")
+    void invokeRenderLatencyIcon(MatrixStack matrices, int width, int x, int y, PlayerListEntry entry);
 }

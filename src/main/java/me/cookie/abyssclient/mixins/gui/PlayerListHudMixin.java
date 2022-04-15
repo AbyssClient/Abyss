@@ -33,11 +33,11 @@ public abstract class PlayerListHudMixin {
      */
     @ModifyConstant(method = "render", constant = @Constant(intValue = 13))
     private int modifySlotWidthConstant(int original) {
-		if (BetterPingList.INSTANCE.getEnabled()) {
-			return original + PLAYER_SLOT_EXTRA_WIDTH;
-		} else {
-			return original;
-		}
+        if (BetterPingList.INSTANCE.getEnabled()) {
+            return original + PLAYER_SLOT_EXTRA_WIDTH;
+        } else {
+            return original;
+        }
     }
 
     /**
@@ -48,8 +48,8 @@ public abstract class PlayerListHudMixin {
             at = @At(value = "INVOKE", target = "net/minecraft/client/gui/hud/PlayerListHud.renderLatencyIcon(Lnet/minecraft/client/util/math/MatrixStack;IIILnet/minecraft/client/network/PlayerListEntry;)V"))
     private void redirectRenderLatencyIconCall(
             PlayerListHud instance, MatrixStack matrices, int width, int x, int y, @NotNull PlayerListEntry entry) {
-		if (BetterPingList.INSTANCE.getEnabled()) {
-			CustomPlayerListHud.INSTANCE.renderPingDisplay(client, instance, matrices, width, x, y, entry);
-		}
+        if (BetterPingList.INSTANCE.getEnabled()) {
+            CustomPlayerListHud.INSTANCE.renderPingDisplay(client, instance, matrices, width, x, y, entry);
+        }
     }
 }

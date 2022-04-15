@@ -7,9 +7,10 @@ import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.websocket.*
 import io.ktor.websocket.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.consumeEach
-import me.cookie.abyssclient.utils.client.logger
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 import me.cookie.abyssclient.utils.client.mc
 import java.util.*
 import java.util.concurrent.TimeUnit

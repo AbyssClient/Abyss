@@ -7,7 +7,6 @@ import net.minecraft.client.network.AbstractClientPlayerEntity
 import net.minecraft.client.util.InputUtil
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.client.world.ClientWorld
-import net.minecraft.entity.Entity
 
 // Game events
 @Nameable("gameTick")

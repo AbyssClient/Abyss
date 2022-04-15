@@ -17,7 +17,7 @@ object KeystrokesModule : UIModule("keystrokes") {
         stack.push()
         if (enabled) {
             renderKeystrokes(stack)
-        } else{
+        } else {
             renderKeystrokes(stack)
         }
         stack.pop()
