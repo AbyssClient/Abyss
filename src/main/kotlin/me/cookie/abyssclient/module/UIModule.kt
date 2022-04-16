@@ -5,8 +5,6 @@ import me.cookie.abyssclient.event.handler
 import net.minecraft.client.gui.screen.ChatScreen
 import net.minecraft.client.gui.screen.ingame.InventoryScreen
 import net.minecraft.client.util.math.MatrixStack
-import net.minecraft.text.LiteralText
-import net.minecraft.text.Style
 import java.awt.Color
 
 
@@ -51,15 +49,6 @@ abstract class UIModule(
         stack.push()
         if (enabled) {
             mc.textRenderer.drawWithShadow(stack, getText(), getScaledX().toFloat(), getScaledY().toFloat(), color.rgb)
-        } else {
-            // If you don't want to render the disabled modules in the drag-screen, just remove/comment following line
-            mc.textRenderer.drawWithShadow(
-                stack,
-                LiteralText(getText()).setStyle(Style.EMPTY.withStrikethrough(true)),
-                getScaledX().toFloat(),
-                getScaledY().toFloat(),
-                color.rgb
-            )
         }
         stack.pop()
     }

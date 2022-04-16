@@ -33,7 +33,7 @@ class PositioningScreen : Screen(LiteralText.EMPTY) {
 
     private fun getNearestModule(): UIModule {
         val moduleCoords: MutableMap<Point2D.Double, UIModule> = HashMap()
-        ModuleManager.getUIModules().filter { it != draggedModule!! }.forEach { m ->
+        ModuleManager.getUIModules().filter { it != draggedModule!! && it.enabled }.forEach { m ->
             moduleCoords[Point2D.Double(m.x, m.y)] = m
         }
         val coords: Set<Point2D.Double> = moduleCoords.keys
