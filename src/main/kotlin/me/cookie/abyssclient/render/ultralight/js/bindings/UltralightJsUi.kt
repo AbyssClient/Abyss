@@ -11,6 +11,7 @@ import net.minecraft.client.gui.screen.option.LanguageOptionsScreen
 import net.minecraft.client.gui.screen.option.OptionsScreen
 import net.minecraft.client.gui.screen.world.SelectWorldScreen
 import net.minecraft.client.realms.gui.screen.RealmsMainScreen
+import the_fireplace.ias.gui.GuiAccountSelector
 
 /**
  * Referenced by JS as `ui`
@@ -32,6 +33,7 @@ object UltralightJsUi {
                 )
             )
         },
+        JsScreen("accountswitcher", GuiAccountSelector::class.java) { mc.setScreen(GuiAccountSelector(it)) },
         JsScreen("multiplayer_realms", RealmsMainScreen::class.java) { mc.setScreen(RealmsMainScreen(it)) }
     )
 

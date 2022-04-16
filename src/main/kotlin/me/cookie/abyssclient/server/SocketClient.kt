@@ -16,8 +16,8 @@ import net.minecraft.client.network.AbstractClientPlayerEntity
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-val playerCache: Cache<String, Player> = Caffeine.newBuilder().maximumSize(1_000).expireAfterWrite(
-    25, TimeUnit.MINUTES
+val playerCache: Cache<String, Player> = Caffeine.newBuilder().maximumSize(5_000).expireAfterWrite(
+    60, TimeUnit.MINUTES
 ).recordStats().build()
 
 private val queue = LinkedList<String>()
@@ -32,7 +32,7 @@ fun getPlayer(uuid: String): Player? {
 fun getPlayer(player: AbstractClientPlayerEntity): Player? = getPlayer(player.uuidAsString)
 
 object SocketClient {
-    val thread = GlobalScope.launch {
+    val job = GlobalScope.launch {
         val client = HttpClient(CIO) {
             install(WebSockets)
         }

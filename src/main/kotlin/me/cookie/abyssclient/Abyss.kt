@@ -62,7 +62,7 @@ object Abyss : Listenable {
             CommandManager.registerInbuilt()
             // Load config
             ConfigSystem.load()
-            SocketClient.thread.start()
+            SocketClient.job.start()
             Cosmetic
             Cosmetic.loadCapes()
         }.onSuccess {
@@ -81,7 +81,7 @@ object Abyss : Listenable {
             logger.info("Shutting down abyss ...")
             ConfigSystem.store()
             UltralightEngine.shutdown()
-            SocketClient.thread.cancelAndJoin()
+            SocketClient.job.cancelAndJoin()
             logger.info("Shut down abyss")
         }
     }
