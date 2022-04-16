@@ -99,7 +99,7 @@ object CommandManager : Iterable<Command> {
             HelloCommand,
             PrefixCommand,
             ToggleCommand,
-            CacheStatus,
+            CacheCommand,
             HelpCommand
         )
         builtIn.onEach {
