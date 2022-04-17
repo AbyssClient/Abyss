@@ -23,7 +23,8 @@ object ModuleManager : Listenable, Iterable<Module> by modules {
             HelloModule,
             BetterPingList,
             XYZModule,
-            RAMModule
+            RAMModule,
+            LinkModule
         )
         builtin.apply {
             sortBy { it.name }
