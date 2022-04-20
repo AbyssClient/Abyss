@@ -10,8 +10,9 @@ import java.awt.Color
 
 abstract class UIModule(
     name: String,
-    state: Boolean = false,
-) : Module(name, state) {
+    category: Category,
+    state: Boolean = false
+) : Module(name, category, state) {
     var x by double("x", 0.0)
     var y by double("y", 0.0)
 

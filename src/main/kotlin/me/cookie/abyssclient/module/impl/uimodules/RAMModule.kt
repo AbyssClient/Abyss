@@ -1,8 +1,9 @@
 package me.cookie.abyssclient.module.impl.uimodules
 
+import me.cookie.abyssclient.module.Category
 import me.cookie.abyssclient.module.UIModule
 
-object RAMModule : UIModule("RAM") {
+object RAMModule : UIModule("RAM", Category.MISC) {
     override fun getText(): String {
         return "RAM: ${getMemPercent()}%"
     }

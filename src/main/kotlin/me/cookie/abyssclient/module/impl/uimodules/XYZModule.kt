@@ -1,9 +1,10 @@
 package me.cookie.abyssclient.module.impl.uimodules
 
+import me.cookie.abyssclient.module.Category
 import me.cookie.abyssclient.module.UIModule
 import kotlin.math.roundToInt
 
-object XYZModule : UIModule("XYZ") {
+object XYZModule : UIModule("XYZ", Category.MISC) {
 
     override fun render(enabled: Boolean) {
         stack.push()

@@ -16,6 +16,8 @@ import net.minecraft.client.world.ClientWorld
 
 abstract class Module(
     name: String,
+    @Exclude
+    val category: Category,
     state: Boolean = false,
     @Exclude
     val disableActivation: Boolean = false,

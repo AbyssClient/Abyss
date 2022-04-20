@@ -2,6 +2,7 @@ package me.cookie.abyssclient.module.impl
 
 import com.mojang.blaze3d.systems.RenderSystem
 import me.cookie.abyssclient.mixins.gui.PlayerListHudInvoker
+import me.cookie.abyssclient.module.Category
 import me.cookie.abyssclient.module.Module
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.hud.PlayerListHud
@@ -10,7 +11,7 @@ import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.util.math.MathHelper
 import kotlin.math.roundToInt
 
-object BetterPingList : Module("BetterPingList", true) {
+object BetterPingList : Module("BetterPingList", Category.QOL,true) {
     val formatString by text("Format String", "%dms")
     val pingBars by boolean("Ping Bars", false)
 }
