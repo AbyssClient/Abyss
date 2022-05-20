@@ -7,7 +7,6 @@ import me.cookie.abyssclient.config.ConfigSystem
 import me.cookie.abyssclient.cosmetics.Cosmetic
 import me.cookie.abyssclient.event.*
 import me.cookie.abyssclient.module.ModuleManager
-import me.cookie.abyssclient.render.ultralight.UltralightEngine
 import me.cookie.abyssclient.server.SocketClient
 import me.cookie.abyssclient.ui.PositioningScreen
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
@@ -26,7 +25,6 @@ object Abyss : Listenable {
         FabricLoader.getInstance().getModContainer("abyss").get().metadata.version.friendlyString
     const val CLIENT_AUTHOR = "Vento"
     const val ROOT_URL = "https://abyss.vincentschweiger.de"
-    const val LIQUID_CLIENT_CLOUD = "https://cloud.liquidbounce.net/LiquidBounce"
 
     val logger: Logger = LoggerFactory.getLogger(CLIENT_NAME)!!
     private val kb: KeyBinding = KeyBindingHelper.registerKeyBinding(
@@ -56,7 +54,6 @@ object Abyss : Listenable {
             ConfigSystem
             ModuleManager
             CommandManager
-            UltralightEngine.init()
             // Register commands & modules
             ModuleManager.registerInbuilt()
             CommandManager.registerInbuilt()
@@ -80,7 +77,6 @@ object Abyss : Listenable {
         runBlocking {
             logger.info("Shutting down abyss ...")
             ConfigSystem.store()
-            UltralightEngine.shutdown()
             SocketClient.job.cancelAndJoin()
             logger.info("Shut down abyss")
         }

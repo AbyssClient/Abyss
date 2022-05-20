@@ -25,11 +25,12 @@ private val queue = LinkedList<String>()
 fun getPlayer(uuid: String): Player? {
     if (playerCache.getIfPresent(uuid) != null) return playerCache.getIfPresent(uuid)!!
     if (!queue.contains(uuid)) queue.add(uuid)
-
     return null
 }
 
-fun getPlayer(player: AbstractClientPlayerEntity): Player? = getPlayer(player.uuidAsString)
+fun getPlayer(player: AbstractClientPlayerEntity): Player? {
+    return getPlayer(player.uuidAsString)
+}
 
 object SocketClient {
     val job = GlobalScope.launch {
@@ -76,7 +77,7 @@ suspend fun WebSocketSession.sendCompressed(msg: String) {
 /**
  * Read a compressed string from other
  */
-suspend fun readCompressed(buf: ByteArray): String {
+fun readCompressed(buf: ByteArray): String {
     val receivedBytes = ByteArray(512)
     Zstd.decompress(receivedBytes, buf)
     return receivedBytes.decodeToString()
