@@ -62,7 +62,6 @@ dependencies {
     includeImplementation("io.ktor:ktor-client-websockets:${project.ktor_version}")
     includeImplementation("com.github.luben:zstd-jni:${project.zstd_version}")
     includeImplementation("com.github.ben-manes.caffeine:caffeine:${project.caffeine_version}")
-    //includeImplementation "com.labymedia:ultralight-java-gpu:${project.ultralight_version}"
     //includeImplementation "me.liuli:Elixir:1.1.0"
 }
 
