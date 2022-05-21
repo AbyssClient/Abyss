@@ -2,6 +2,7 @@ package me.cookie.abyssclient.ui
 
 import me.cookie.abyssclient.module.ModuleManager
 import me.cookie.abyssclient.module.UIModule
+import me.cookie.abyssclient.render.utils.EmptyScreen
 import me.cookie.abyssclient.utils.client.mc
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.util.math.MatrixStack
@@ -10,7 +11,7 @@ import java.awt.Color
 import java.awt.geom.Point2D
 
 
-class PositioningScreen : Screen(LiteralText.EMPTY) {
+class PositioningScreen : EmptyScreen() {
     private var draggedModule: UIModule? = null
 
     override fun init() {

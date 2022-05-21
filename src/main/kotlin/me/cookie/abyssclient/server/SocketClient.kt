@@ -11,8 +11,12 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import me.cookie.abyssclient.mixins.gui.PlayerListHudInvoker
 import me.cookie.abyssclient.utils.client.mc
+import me.cookie.abyssclient.utils.game.isProbablyNpc
+import net.minecraft.client.gui.hud.PlayerListHud
 import net.minecraft.client.network.AbstractClientPlayerEntity
+import net.minecraft.client.network.PlayerListEntry
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -29,6 +33,7 @@ fun getPlayer(uuid: String): Player? {
 }
 
 fun getPlayer(player: AbstractClientPlayerEntity): Player? {
+    if (isProbablyNpc(player.uuid)) return null
     return getPlayer(player.uuidAsString)
 }
 
