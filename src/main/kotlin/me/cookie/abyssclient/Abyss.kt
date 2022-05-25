@@ -8,6 +8,7 @@ import me.cookie.abyssclient.cosmetics.Cosmetic
 import me.cookie.abyssclient.event.*
 import me.cookie.abyssclient.module.ModuleManager
 import me.cookie.abyssclient.server.SocketClient
+import me.cookie.abyssclient.ui.ModuleScreen
 import me.cookie.abyssclient.ui.PositioningScreen
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper
 import net.fabricmc.loader.api.FabricLoader
@@ -27,7 +28,7 @@ object Abyss : Listenable {
     const val ROOT_URL = "https://abyss.vincentschweiger.de"
 
     val logger: Logger = LoggerFactory.getLogger(CLIENT_NAME)!!
-    private val kb: KeyBinding = KeyBindingHelper.registerKeyBinding(
+    private val pkb: KeyBinding = KeyBindingHelper.registerKeyBinding(
         KeyBinding(
             "abyss.keybinding.positioning",
             InputUtil.Type.KEYSYM,
@@ -36,11 +37,23 @@ object Abyss : Listenable {
         )
     )
 
+    private val mkb: KeyBinding = KeyBindingHelper.registerKeyBinding(
+        KeyBinding(
+            "abyss.keybinding.modules",
+            InputUtil.Type.KEYSYM,
+            GLFW.GLFW_KEY_M,
+            "Phantom"
+        )
+    )
+
     /**
      * Called every tick
      */
     val tickHandler = handler<GameTickEvent> {
-        if (kb.wasPressed()) MinecraftClient.getInstance().setScreen(PositioningScreen())
+        if (pkb.wasPressed())
+            MinecraftClient.getInstance().setScreen(PositioningScreen())
+        else if (mkb.wasPressed())
+            MinecraftClient.getInstance().setScreen(ModuleScreen())
     }
 
     /**
